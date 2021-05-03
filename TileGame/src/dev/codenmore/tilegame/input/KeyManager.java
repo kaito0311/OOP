@@ -15,17 +15,17 @@ public class KeyManager implements KeyListener {
 		left = keys[KeyEvent.VK_A];
 		right = keys[KeyEvent.VK_D];
 	}
+	  
 	
 	public KeyManager()
 	{
 		keys = new boolean[256];
 	}
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
-
-		
 	}
-
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 

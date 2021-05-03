@@ -3,11 +3,12 @@ package dev.codenmore.tilegame.states;
 import java.awt.Graphics;
 
 import dev.codenmore.tilegame.Game;
+import dev.codenmore.tilegame.Handler;
 
 public abstract class State {
 	
 	private static State currentState = null;
-	protected Game game;
+	protected Handler handler;
 	
 	public static void setState(State state)
 	{
@@ -19,9 +20,9 @@ public abstract class State {
 		return currentState;
 	}
 	
-	public State(Game game)
+	public State(Handler handler)
 	{
-		this.game = game;
+		this.handler = handler;
 	}
 	
 	public abstract void tick();

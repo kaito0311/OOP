@@ -1,23 +1,28 @@
 package dev.codenmore.tilegame.entities;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import dev.codenmore.tilegame.Game;
+import dev.codenmore.tilegame.Handler;
 
 public abstract class Entity {
 	
-	protected Game game;
+	protected Handler handler;
 	protected float x,y;
 	protected int width, height;
+	protected Rectangle bounds;
 	
-	public Entity(Game game,float x, float y, int width, int height)
+	public Entity(Handler handler,float x, float y, int width, int height)
 	{
 		
 		this.x = x; 
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.game = game;
+		this.handler = handler;
+
+		bounds = new Rectangle(0,0, width, height);
 	}
 	
 	public float getX() {

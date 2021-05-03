@@ -41,7 +41,9 @@ public class Game implements Runnable {
 
 	private GameCamera gameCamera;
 	
+	//handler
 	
+	private Handler handler;
 	
 	
 	
@@ -57,11 +59,12 @@ public class Game implements Runnable {
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
 
-		gameCamera = new GameCamera(this,0, 0);
+		handler = new Handler(this);
+		gameCamera = new GameCamera(handler,0, 0);
 		
-		gameState = new GameState(this);
+		gameState = new GameState(handler);
 		State.setState(gameState);
-		menuState= new MenuState(this);
+		menuState= new MenuState(handler);
 		
 	}
 	

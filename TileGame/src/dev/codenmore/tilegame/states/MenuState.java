@@ -3,11 +3,12 @@ package dev.codenmore.tilegame.states;
 import java.awt.Graphics;
 
 import dev.codenmore.tilegame.Game;
+import dev.codenmore.tilegame.Handler;
 
 public class MenuState extends State {
-	public MenuState(Game game)
+	public MenuState(Handler handler)
 	{
-		super(game);
+		super(handler);
 	}
 
 	@Override

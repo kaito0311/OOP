@@ -3,6 +3,7 @@ package dev.codenmore.tilegame.worlds;
 import java.awt.Graphics;
 
 import dev.codenmore.tilegame.Game;
+import dev.codenmore.tilegame.Handler;
 import dev.codenmore.tilegame.tiles.Tile;
 import dev.codenmore.tilegame.utils.*;
 
@@ -13,12 +14,12 @@ public class World {
 	private int width, height;
 	private int[][] tiles;
 	private int spawnX, spawnY;
-	private Game game; 
+	private Handler handler; 
 	
-	public World(Game game,String path)
+	public World(Handler handler,String path)
 	{
 		loadWorld(path);
-		this.game = game; 
+		this.handler = handler; 
 	}
 	
 	public void tick()
@@ -27,21 +28,24 @@ public class World {
 	}
 	public void render(Graphics g)
 	{
-		int xStart = 0; 
-		int xEnd = 0; 
-		int yStart = 0; 
-		int yEnd = 0 ; 
-		for(int y =0; y < height; y++)
+		int xStart = (int) Math.max(0,handler.getGameCamera().getxOffset()/Tile.TILEWIDTH); 
+		int xEnd = (int)Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth())/Tile.TILEWIDTH+1); 
+		int yStart = (int) Math.max(0, handler.getGameCamera().getyOffset()/Tile.TILEHEIGHT); 
+		int yEnd = (int)Math.min(height, (handler.getGameCamera().getyOffset()+ handler.getHeight())/Tile.TILEHEIGHT+1) ; 
+		for(int y =yStart; y < yEnd; y++)
 		{
-			for(int x = xStart; x < xEnd; x ++)
+			for(int x = xStart; x < xEnd; x++)
 			{
-				getTile(x, y).render(g,(int) (x*Tile.TILEWIDTH - game.getGameCamera().getxOffset()),(int)(y* Tile.TILEHEIGHT - game.getGameCamera().getyOffset() ));
+				getTile(x, y).render(g,(int) (x*Tile.TILEWIDTH - handler.getGameCamera().getxOffset()),(int)(y* Tile.TILEHEIGHT - handler.getGameCamera().getyOffset() ));
 			}
 		}
 	}
 	
 	public Tile getTile(int x, int y)
 	{
+		if(x <0 || y < 0|| x >= width || y >= height)
+			return Tile.dirtTile;
+
 		Tile t = Tile.tiles[tiles[x][y]];
 		if(t== null)
 			return Tile.dirtTile;
@@ -68,5 +72,16 @@ public class World {
 		
 		
 		
+	}
+	
+	
+	public int getWidth()
+	{
+		return width;
+	}
+	
+	public int getHeight()
+	{
+		return height;
 	}
 }
