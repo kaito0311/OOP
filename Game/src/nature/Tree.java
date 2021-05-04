@@ -31,7 +31,13 @@ public class Tree extends Entity{
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(tree[index], 32*x, 32*y, null);
+		g.drawImage(tree[index],  (int)(32 * x), (int)(32 *y), null);
+	}
+
+	@Override
+	public void tick() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
