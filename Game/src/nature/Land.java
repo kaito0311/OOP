@@ -34,7 +34,13 @@ public class Land extends Entity{
 	@Override
 	public void render(Graphics g) {
 		this.texture = Texture.getTexture(name);
-		g.drawImage(texture, 32 * x, 32 *y, null);
+		g.drawImage(texture, (int)(32 * x), (int)(32 *y), null);
+	}
+
+	@Override
+	public void tick() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

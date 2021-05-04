@@ -33,7 +33,13 @@ public class Flower extends Entity{
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(flower[index], 32*x, 32*y, null);
+		g.drawImage(flower[index], (int)(32*x), (int)(32*y), null);
+	}
+
+	@Override
+	public void tick() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -33,7 +33,12 @@ public class Water extends Entity{
 	@Override
 	public void render(Graphics g) {
 		temp = Texture.getTexture(name);
-		g.drawImage(temp, x*32, y*32, null);
+		g.drawImage(temp, (int)(32 * x), (int)(32 *y), null);
+	}
+	@Override
+	public void tick() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
