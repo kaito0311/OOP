@@ -22,13 +22,13 @@ public class Assets {
 		player_down = new BufferedImage[8];
 		sheet = new SpriteSheet(ImageLoader.loadImage("/textures/boss01.png"));
 		
-
+		
 		
 		player_down[0] = sheet.crop(0,0, width, height);
 		player_down[1] = sheet.crop(140,0, width, height);
 		player_down[2] = sheet.crop(280,0, width, height);
 		player_down[3] = sheet.crop(420,0, width, height);
-		player_down[4] = sheet.crop(558,0, width, height);
+		player_down[4] = sheet.crop(558,0, width,height);
 		player_down[5] = sheet.crop(0,149, width, height);
 		player_down[6] = sheet.crop(140,149, width, height);
 		player_down[7] = sheet.crop(280,149, width, height);

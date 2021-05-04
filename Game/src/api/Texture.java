@@ -15,12 +15,20 @@ public class Texture {
 	public static BufferedImage grass,land,grass_tiny,overworld,water;
 	public static HashMap<String, Image> tiles = new HashMap<>();
 	
-	// Tao noi luu cac anh 
+	// Tao noi luu cac anh player 
 	public static BufferedImage player; // luu anh to 
 	public static BufferedImage[] player_down; // luu anh di xuong 
 	public static BufferedImage[] player_up;
 	public static BufferedImage[] player_left;
 	public static BufferedImage[] player_right;
+
+	// anh boss
+	public static BufferedImage boss;
+	public static BufferedImage[] boss_right;
+
+
+
+
 	
 
 	
@@ -34,6 +42,7 @@ public class Texture {
 			
 			// Lay anh Player To 
 			player = ImageIO.read(new File("src/assets/character.png"));
+			boss = ImageIO.read(new File("src/assets/boss01.png"));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -116,6 +125,20 @@ public class Texture {
 		player_right[1] = player.getSubimage(16, 37, 16, 23);
 		player_right[2] = player.getSubimage(32, 37, 16, 23);
 		player_right[3] = player.getSubimage(48, 37, 16, 23);
+
+
+		// load boss image 
+		boss_right = new BufferedImage[8];
+		 
+		boss_right[0] = boss.getSubimage(0,0, 140, 140);
+		boss_right[1] = boss.getSubimage(140,0, 140, 140);
+		boss_right[2] = boss.getSubimage(280,0, 140, 140);
+		boss_right[3] = boss.getSubimage(420,0, 140, 140);
+		boss_right[4] = boss.getSubimage(558,0, 140,140);
+		boss_right[5] = boss.getSubimage(0,149, 140, 140);
+		boss_right[6] = boss.getSubimage(140,149, 140, 140);
+		boss_right[7] = boss.getSubimage(280,149, 140, 140);
+		
 
 
 	}
