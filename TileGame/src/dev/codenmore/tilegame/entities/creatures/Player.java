@@ -26,7 +26,7 @@ public class Player extends Creature {
 		bounds.height = 25;
 		
 		
-		aniDown = new Animation(80, Assets.player_down);
+		aniDown = new Animation(300, Assets.player_down);
 		
 	}
 

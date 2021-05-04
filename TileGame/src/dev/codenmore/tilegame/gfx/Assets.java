@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 public class Assets {
 	
-	private static final int width  = 240, height = 290;
+	private static final int width  = 140, height = 140;
 	
 	public static BufferedImage player1, player2, player3, player4;
 	public static BufferedImage[] player_down, player_up; 
@@ -19,15 +19,19 @@ public class Assets {
 		player4 = sheet.crop(0,5, width, height);
 		
 		
-		player_down = new BufferedImage[4];
-		sheet = new SpriteSheet(ImageLoader.loadImage("/textures/pngegg.png"));
+		player_down = new BufferedImage[8];
+		sheet = new SpriteSheet(ImageLoader.loadImage("/textures/boss01.png"));
 		
 
 		
-		player_down[0] = sheet.crop(60,50, width, height);
-		player_down[1] = sheet.crop(300,50, width, height);
-		player_down[2] = sheet.crop(570,70, width, height);
-		player_down[3] = sheet.crop(860,70, width, height);
+		player_down[0] = sheet.crop(0,0, width, height);
+		player_down[1] = sheet.crop(140,0, width, height);
+		player_down[2] = sheet.crop(280,0, width, height);
+		player_down[3] = sheet.crop(420,0, width, height);
+		player_down[4] = sheet.crop(558,0, width, height);
+		player_down[5] = sheet.crop(0,149, width, height);
+		player_down[6] = sheet.crop(140,149, width, height);
+		player_down[7] = sheet.crop(280,149, width, height);
 //		player_down[1] = sheet.crop(290,50, width, height);
 		
 	}

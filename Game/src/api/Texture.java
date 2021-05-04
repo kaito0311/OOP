@@ -14,6 +14,14 @@ public class Texture {
 	
 	public static BufferedImage grass,land,grass_tiny,overworld,water;
 	public static HashMap<String, Image> tiles = new HashMap<>();
+	
+	// Tao noi luu cac anh 
+	public static BufferedImage player; // luu anh to 
+	public static BufferedImage[] player_down; // luu anh di xuong 
+	public static BufferedImage[] player_up;
+	public static BufferedImage[] player_left;
+	public static BufferedImage[] player_right;
+	
 
 	
 	public static void loadImage() {
@@ -23,6 +31,10 @@ public class Texture {
 			grass_tiny = ImageIO.read(new File("src/assets/grass_tiny.png"));
 			overworld = ImageIO.read(new File("src/assets/overworld.png"));
 			water = ImageIO.read(new File("src/assets/water.png"));
+			
+			// Lay anh Player To 
+			player = ImageIO.read(new File("src/assets/character.png"));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -75,6 +87,36 @@ public class Texture {
 		tiles.put("flower_7",overworld.getSubimage(32*6, 6*32, 32, 32));
 		tiles.put("flower_8",overworld.getSubimage(32*7, 6*32, 32, 32));
 		
-		System.out.println("Loading Successful");
+		
+		System.out.println(("hi"));
+		
+		// lay anh con 
+		player_down =  new BufferedImage[4];
+		player_up =  new BufferedImage[4];
+		player_right =  new BufferedImage[4];
+		player_left =  new BufferedImage[4];
+
+
+		player_down[0] = player.getSubimage(0, 5, 16, 23);
+		player_down[1] = player.getSubimage(16, 5, 16, 23);
+		player_down[2] = player.getSubimage(32, 5, 16, 23);
+		player_down[3] = player.getSubimage(48, 5, 16, 23);
+
+		player_up[0] = player.getSubimage(0, 69, 16, 23);
+		player_up[1] = player.getSubimage(16, 69, 16, 23);
+		player_up[2] = player.getSubimage(32, 69, 16, 23);
+		player_up[3] = player.getSubimage(48, 69, 16, 23);
+
+		player_left[0] = player.getSubimage(0, 101, 16, 23);
+		player_left[1] = player.getSubimage(16, 101, 16, 23);
+		player_left[2] = player.getSubimage(32, 101, 16, 23);
+		player_left[3] = player.getSubimage(48, 101, 16, 23);
+
+		player_right[0] = player.getSubimage(0, 37, 16, 23);
+		player_right[1] = player.getSubimage(16, 37, 16, 23);
+		player_right[2] = player.getSubimage(32, 37, 16, 23);
+		player_right[3] = player.getSubimage(48, 37, 16, 23);
+
+
 	}
 }
