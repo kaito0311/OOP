@@ -18,7 +18,10 @@ public class Texture {
 	public static BufferedImage[] player_up;
 	public static BufferedImage[] player_left;
 	public static BufferedImage[] player_right;
-
+    public static BufferedImage[] attack_down;
+    public static BufferedImage[] attack_up;
+    public static BufferedImage[] attack_right;
+    public static BufferedImage[] attack_left;
 	public static BufferedImage[] boss_right;
 	
 	public static void loadImage() {
@@ -86,7 +89,10 @@ public class Texture {
 		player_up =  new BufferedImage[4];
 		player_right =  new BufferedImage[4];
 		player_left =  new BufferedImage[4];
-
+        attack_up= new BufferedImage[4];
+        attack_down= new BufferedImage[4];
+        attack_right= new BufferedImage[4];
+        attack_left= new BufferedImage[4];
 
 		player_down[0] = player.getSubimage(0, 5, 16, 23);
 		player_down[1] = player.getSubimage(16, 5, 16, 23);
@@ -107,6 +113,26 @@ public class Texture {
 		player_right[1] = player.getSubimage(16, 37, 16, 23);
 		player_right[2] = player.getSubimage(32, 37, 16, 23);
 		player_right[3] = player.getSubimage(48, 37, 16, 23);
+		
+		attack_down[0] = player.getSubimage(7, 133, 18, 23);
+		attack_down[1] = player.getSubimage(39, 133, 18, 23);
+		attack_down[2] = player.getSubimage(71, 133, 18, 23);
+		attack_down[3] = player.getSubimage(104, 133, 18, 23);
+		
+		attack_up[0] = player.getSubimage(7, 165, 18, 23);
+		attack_up[1] = player.getSubimage(39, 165, 18,23);
+		attack_up[2] = player.getSubimage(71, 165, 18, 23);
+		attack_up[3] = player.getSubimage(104, 165, 18, 23);
+		
+		attack_right[0] = player.getSubimage(8, 198, 18, 23);
+		attack_right[1] = player.getSubimage(40, 198, 21, 23);
+		attack_right[2] = player.getSubimage(71, 198, 18, 23);
+		attack_right[3] = player.getSubimage(104, 198, 18, 23);
+		
+		attack_left[0] = player.getSubimage(8, 230, 16, 23);
+		attack_left[1] = player.getSubimage(32, 230, 20, 23);
+		attack_left[2] = player.getSubimage(67, 230, 18, 23);
+		attack_left[3] = player.getSubimage(100, 230, 20, 23);
 
 
 		// load boss image 

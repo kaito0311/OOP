@@ -2,8 +2,10 @@ package Api.creature;
 
 import java.awt.Graphics;
 
-public class Boss extends Creature {
+import Api.Animation;
 
+public class Boss extends Creature {
+    private Animation boss_right;
 	public Boss(float x, float y, int width, int height) {
 		super(x, y, width, height);
 		
