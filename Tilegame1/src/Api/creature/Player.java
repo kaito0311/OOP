@@ -2,7 +2,6 @@ package Api.creature;
 
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
 import Api.Animation;
 import Api.Texture;
@@ -21,6 +20,7 @@ public class Player extends Creature{
 	    player_down= new Animation(Texture.player_down,300);
 		player_left= new Animation(Texture.player_left,300);
 		player_right= new Animation(Texture.player_right,300);
+
 		attack_up = new Animation(Texture.attack_up,500);
 		attack_down = new Animation(Texture.attack_down,500);
 		attack_left = new Animation(Texture.attack_left,500);

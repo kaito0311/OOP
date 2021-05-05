@@ -18,6 +18,7 @@ public class Texture {
 	public static BufferedImage[] player_up;
 	public static BufferedImage[] player_left;
 	public static BufferedImage[] player_right;
+	
     public static BufferedImage[] attack_down;
     public static BufferedImage[] attack_up;
     public static BufferedImage[] attack_right;
