@@ -5,43 +5,34 @@ import java.awt.Image;
 
 import Api.Entity;
 import Api.Texture;
+import Api.Tile;
 
-public class Land extends Entity{
-	private static String[] land = {"land_1","land_2","land_3","land_4"
-	,"land_5","land_6","land_7","land_8","land_15","land_9","land_10","land_11","land_13","land_14"};
-	private Image texture;
-	private String name;
+public class Land extends Tile{
+	private static Image[] lands;
+	private int id;
+	
 //	id from 1 to 15
 	public Land() {
-		
+		super(lands, 0, 0);
+		init();
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
-	public Land(String name,int x,int y) {
-		this.name = name;
-		this.x = x;
-		this.y = y;
+	public void init() {
+		lands = new Image[15];
+		for(int i = 0; i < 15;i++) {
+			lands[i] = Texture.getTexture("land_"+(i+1));
+		}
 	}
-	
-	public void setLand(String name,int x,int y) {
-		this.name = name;
-		this.x = x;
-		this.y = y;
-	}
-	
-	@Override
-	public void update(float delta) {
-		
+
+	public void render(Graphics g,int x,int y) {
+		g.drawImage(lands[id-1],(int) (32 * x),(int) (32 *y), null);
 	}
 
 	@Override
-	public void render(Graphics g) {
-		this.texture = Texture.getTexture(name);
-		g.drawImage(texture,(int) (32 * x),(int) (32 *y), null);
-	}
-
-	@Override
-	public void tick() {
-		// TODO Auto-generated method stub
+	public void update() {
 		
 	}
 	

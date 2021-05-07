@@ -1,6 +1,9 @@
+
+// chuyen nguyen sang (Tan minh)
 package Api;
 import java.awt.Graphics;
 import java.util.concurrent.ThreadLocalRandom;
+import java.awt.image.BufferedImage;
 public class Knights {
     private knight[] npc;
     private int count_NPC;
@@ -14,6 +17,16 @@ public class Knights {
 
     }
 
+    private BufferedImage[] randomImage(int i)
+    {
+        if(i == 0) return Texture.bat;
+        if(i == 1) return Texture.slime;
+        if(i == 2) return Texture.spider;
+        if(i == 3) return Texture.skeleton;
+        return null;
+
+    }
+
     public void init()
     {
         float center_x,center_y ; 
@@ -22,9 +35,10 @@ public class Knights {
             
             center_x = ThreadLocalRandom.current().nextInt(1, 300);
             center_y = ThreadLocalRandom.current().nextInt(1,300);
-            npc[i] = new knight(center_x, center_y, 35, 35);
+            npc[i] = new knight(center_x, center_y, 32, 32);
             npc[i].setCenter_x(center_x);
             npc[i].setCenter_y(center_y);
+            npc[i].setAnimationImage(randomImage(i%4));
 
         }
     }

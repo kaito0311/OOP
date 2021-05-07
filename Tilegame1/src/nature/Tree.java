@@ -6,38 +6,31 @@ import java.util.Random;
 
 import Api.Entity;
 import Api.Texture;
+import Api.Tile;
 
-public class Tree extends Entity{
-//	id = 16
-	private Random rd;
-	int index;
-	private Image[] tree = {Texture.getTexture("tree_1"),Texture.getTexture("tree_2"),
-			Texture.getTexture("tree_3")};
+public class Tree extends Tile{
+//	id = 18
+	private boolean isBigTree;
+	private static Image[] trees;
+	private int id;
 	
 	public Tree() {
-		rd = new Random();
+		super(trees, 0, 0);
+		init();
 	}
-	
-	public void setTree(int x,int y) {
-		index = 2;
-		this.x = x;
-		this.y = y;
-	}
-
 	@Override
-	public void update(float delta) {
+	public void update() {
 		
 	}
-
+	public void init() {
+		trees = new Image[4];
+		for(int i = 0; i < 4;i++) {
+			trees[i] = Texture.getTexture("tree_"+(i+1));
+		}
+	}
 	@Override
-	public void render(Graphics g) {
-		g.drawImage(tree[index],(int) (32*x),(int) (32*y), null);
+	public void render(Graphics g, int x, int y) {
+		g.drawImage(trees[y%4], x*32, y*32, null);
 	}
 
-	@Override
-	public void tick() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

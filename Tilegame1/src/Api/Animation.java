@@ -1,3 +1,5 @@
+
+// Copy All ( Tan Minh)
 package Api;
 
 import java.awt.image.BufferedImage;

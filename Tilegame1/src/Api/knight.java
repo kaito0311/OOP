@@ -1,18 +1,23 @@
+// chuyen nguyen sang (Tan minh)
+
 package Api;
 
 import java.awt.Graphics;
 import java.util.concurrent.ThreadLocalRandom;
+import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 
 
 public class knight extends NPC{
 
     private Animation darkKinght;
+    private BufferedImage[] Image;
 
     public knight(float x, float y, int width, int height) {
         super(x, y, width, height);
         R = 50.0;
 
-        darkKinght = new Animation(Texture.Knight,200);
+       
 
 
          
@@ -22,6 +27,20 @@ public class knight extends NPC{
     {
         Center_x = ThreadLocalRandom.current().nextInt(1, 300);
         Center_y = ThreadLocalRandom.current().nextInt(1, 300);
+    }
+
+    public void setAnimationImage(BufferedImage[] Image)
+    {
+        this.Image = Image;
+        darkKinght = new Animation(Image,200);
+    }
+    public BufferedImage[] getImage()
+    {
+        return Image;
+    }
+    public Animation getAnimationImage()
+    {
+        return darkKinght;
     }
 
 
@@ -37,14 +56,7 @@ public class knight extends NPC{
 
     @Override
     public void render(Graphics g) {
-        if(moveX > 0)
-        {
-            g.drawImage(darkKinght.getCurrentImage(Texture.Knight), (int)x,(int)y, width,height,null);
-        }
-        else
-        {
-            g.drawImage(darkKinght.getCurrentImage(Texture.Knight), (int)x+ width,(int)y, -width,height,null);
-        }
+        g.drawImage(getAnimationImage().getCurrentImage(getImage()), (int)x, (int)y, 32,32,null);
         
     }
 

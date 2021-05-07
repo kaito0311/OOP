@@ -5,40 +5,37 @@ import java.awt.Image;
 
 import Api.Entity;
 import Api.Texture;
+import Api.Tile;
 
-public class Water extends Entity{
-	private String name;
-	private Image temp;
-	private Image water[] = {
-			Texture.getTexture("water_1"),Texture.getTexture("water_2"),
-			Texture.getTexture("water_3"),Texture.getTexture("water_4"),
-			Texture.getTexture("water_5")
-	};
+public class Water extends Tile{
+	private int id;
+	private static Image water[];
 //	id from 21 to 35
 	
 	public Water() {
-		
+		super(water, 0, 0);
+		init();
 	}
-	public void setWater(String name,int x,int y) {
-		this.name = name;
-		this.x = x;
-		this.y = y;
+	
+	public void init() {
+		water = new Image[15];
+		for(int i = 0; i < 15;i++) {
+			water[i] = Texture.getTexture("water_"+(i+1));
+		}
 	}
-
-	@Override
-	public void update(float delta) {
-		
+	
+	public void setId(int id) {
+		this.id = id;
 	}
-
-	@Override
-	public void render(Graphics g) {
-		temp = Texture.getTexture(name);
-		g.drawImage(temp,(int) (x*32),(int) (y*32), null);
-	}
-	@Override
-	public void tick() {
-		// TODO Auto-generated method stub
-		
-	}
+	
+    @Override
+    public void update() {
+	
+    }
+    
+    @Override
+    public void render(Graphics g, int x, int y) {
+    	g.drawImage(water[id-1], x*32, y*32, null);
+    }
 	
 }

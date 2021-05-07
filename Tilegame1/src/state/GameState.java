@@ -1,9 +1,10 @@
+// sua vai cho :)) (Tan minh )
+
 package state;
 
 import java.awt.Graphics;
 
 import Api.Knights;
-import Api.knight;
 import Api.creature.Boss;
 import Api.creature.Player;
 import Application.Game;
@@ -11,29 +12,36 @@ import Application.Game;
 public class GameState {
    private Game game;
    private Player player;
+
+   // Minh sua 
    private Boss boss;
    private Knights quai;
+   // end 
+
    public GameState(Game game) {
 	   this.game=game;
-	   player= new Player(game,100,100,32,32);
+	   player= new Player(game,0,0,32,32);
+
+      // Minh sua 
       boss = new Boss(game, 150,150,70,60, player);
    
       quai = new Knights(10);
-
+      // 
    }
-
-
-
-
    public void update() {
-      // System.out.println("loi");
 	   player.tick();
+
+      // Minh sua 
       boss.tick();
       quai.tick();
+      // end 
    }
    public void render(Graphics g) {
 	   player.render(g);
+
+      // Minh sua 
       quai.render(g);
       boss.render(g);
+      // end 
    }
 }
