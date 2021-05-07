@@ -62,7 +62,7 @@ public class Attack extends Entity {
     public void render(Graphics g) {
         // System.out.println("loi");
 
-        g.drawImage(attack.getCurrentImage(Texture.fire_attack),(int)x - 80,(int)y -80 , 192,192,null);
+        g.drawImage(attack.getCurrentImage(Texture.fire_attack),(int)(x -  width/2),(int)(y -height/2) , 192,192,null);
         
     }
     

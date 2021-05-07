@@ -13,7 +13,7 @@ public class GameState {
    public GameState(Game game) {
 	   this.game=game;
 	   player= new Player(game,100,100,32,32);
-      boss = new Boss(game, 100,100,70,60, player);
+      boss = new Boss(game, 150,150,70,60, player);
       
 
    }

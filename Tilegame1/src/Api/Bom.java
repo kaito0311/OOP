@@ -25,16 +25,26 @@ public class Bom extends Entity{
         this.y = y;
     }
 
+    public Animation getBomAnimation()
+    {
+        return bom;
+    }
+
     @Override
     public void tick() {
 
-        
+        bom.update();
+    }
+
+    public void setIndexBom(int dem)
+    {
+        bom.setIndex(dem);
     }
 
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(bom.getCurrentImage(Texture.bom_bum),(int) x,(int) y, width, height, null);
+        g.drawImage(bom.getCurrentImage(Texture.bom_bum),(int)(x- width/2),(int)(y-height/2), width, height, null);
         
     }
 

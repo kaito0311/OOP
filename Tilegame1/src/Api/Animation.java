@@ -14,6 +14,10 @@ public class Animation {
     	time=0;
     	last_time=System.currentTimeMillis();
     }
+    public int getImageLength()
+    {
+        return Images.length;
+    }
 
     public void update() {
         time+= System.currentTimeMillis()-last_time;

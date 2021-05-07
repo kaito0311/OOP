@@ -1,35 +1,35 @@
 package Api.creature;
 
 import java.awt.Graphics;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.util.Random;
+// import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import Api.Animation;
+import Api.Bom;
 import Api.Texture;
 import Application.Game;
-import Game.map.map;
+// import Game.map.map;
 import java.awt.*;
-import javax.swing.*;
-import java.awt.geom.*;
 
 public class Boss extends Creature {
-	private int dem = 0;
-	private double rand;
+	private int picture_attack = 0;
+	private int picture_die = 0;
+	// private double rand;
 
 	private Game game;
 
 	// hinh cho boss di chuyen
 	private Animation boss_up, boss_down, boss_right, boss_left;
 
-	private map map_world;
+	// private map map_world;
 	private Player player;
 	//
-	private Random generator = new Random();
+	// private Random generator = new Random();
 	private boolean isAttack; // boss duoc phep tan cong khong
+	private boolean isDie;
 	private long time_boss_move; // thoi gian di chuyen cua boss
 	private Attack fire;
+	private Bom bom_die;
 
 	// tao pham vi cho boss di chuyen
 	private final float Center_x = 200;
@@ -46,7 +46,7 @@ public class Boss extends Creature {
 		this.game = game;
 		this.player = player;
 
-		map_world = new map();
+		// map_world = new map();
 
 		boss_up = new Animation(Texture.boss_up, 200);
 		boss_down = new Animation(Texture.boss_down, 200);
@@ -55,7 +55,11 @@ public class Boss extends Creature {
 
 		fire = new Attack(game, 0, 0, 192, 192, 0);
 
+		bom_die = new Bom(game, x, y, 160, 116);
+
 		isAttack = false;
+		isDie = false;
+		picture_die = 0;
 
 	}
 
@@ -65,6 +69,7 @@ public class Boss extends Creature {
 		update_move();
 		boss_state_update();
 		move();
+		bom_die.tick();
 
 	}
 
@@ -117,7 +122,7 @@ public class Boss extends Creature {
 	private void update_move() {
 		if (check_index(player.getX(), player.getY())) {
 			isAttack = true;
-			if (Math.abs(player.getX() - x) >= 100.f) {
+			if (Math.abs(player.getX() - x) >= 10.f) {
 				if (player.getX() > x) {
 					moveX = 3.0f;
 				} else
@@ -126,7 +131,7 @@ public class Boss extends Creature {
 				return;
 
 			}
-			if (Math.abs(player.getY() - y) >= 100.0f) {
+			if (Math.abs(player.getY() - y) >= 10.0f) {
 
 				if (player.getY() > y) {
 					moveY = 3.0f;
@@ -137,6 +142,7 @@ public class Boss extends Creature {
 				return;
 
 			}
+			// isDie = true;
 			moveX = moveY = 0;
 
 			return;
@@ -144,13 +150,13 @@ public class Boss extends Creature {
 		} else {
 
 			isAttack = false;
-			dem = 0;
+			picture_attack = 0;
 
 			// thoi gian boss giu nguyen mot trang thai la 3s
 			// kiem tra xem thoi gian vuot qua chua hoac boss da ra ngoai pham vi chua
 			if (System.currentTimeMillis() - time_boss_move > 3000 || !check_index(this.x, this.y)) {
 				time_boss_move = System.currentTimeMillis();
-				rand = Math.random();
+				// rand = Math.random();
 				if (ThreadLocalRandom.current().nextInt(1, 100) < 50) {
 					setMoveX();
 				} else {
@@ -162,84 +168,92 @@ public class Boss extends Creature {
 	}
 
 	private void attack_update() {
-		if (dem >= Texture.fire_attack.length) {
-			dem = 0;
-			fire.setIndexAttack(dem);
+		if (picture_attack >= Texture.fire_attack.length) {
+			picture_attack = 0;
+			fire.setIndexAttack(picture_attack);
 		}
-		System.out.println(dem);
-		if (dem == 0) {
-			System.out.println("sg");
-			fire.setToado(x, y);
+		// System.out.println(picture_attack);
+		if (picture_attack == 0) {
+			// System.out.println("sg");
+			fire.setToado(x + 2, y + 1);
 			fire.setRoad(player.getX(), player.getY());
-			dem += 1;
+			picture_attack += 1;
 		}
 
 		fire.tick();
-		dem += 1;
+		picture_attack += 1;
 	}
-	
-	
-	private Graphics2D rotate(Graphics g)
-	{
-		Graphics2D g2d = (Graphics2D)g;
-		g2d.translate(x, y);
+
+	private Graphics2D rotate(Graphics g, int up_down) {
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.translate((int) (x), (int) (y));
 		double alpha = 0;
-		float distance_x = player.getX() - this.x ;
-		float distance_y = player.getY() - this.y;
-		if(distance_y <0.000000001)
-		{
+		// System.out.println(x + " " + y);
+		float distance_x = player.getX() - this.x;
+		float distance_y = this.y - player.getY();
+		distance_y *= up_down;
+		if (distance_y < 0.000000001) {
 			distance_y = 0.00000001f;
 		}
-		try
-		{
-		alpha = Math.atan((double)(distance_x/distance_y));
+		try {
+			alpha = Math.atan((double) (distance_x / distance_y)) * up_down;
+		} catch (ArithmeticException e) {
+			System.out.println(e.getMessage());
 		}
-		catch(ArithmeticException e)
-		{
-			
-		}
-		
 
-		
+		g2d.rotate(alpha);
+		g2d.translate(-width / 2, -height / 2);
 
-		g2d.rotate(0.5235987756);
-		 
 		return g2d;
 	}
+
 	@Override
 	public void render(Graphics g) {
+		if (isDie) {
+			if (picture_die < bom_die.getBomAnimation().getImageLength()) {
+				picture_die++;
+				bom_die.setToado(x, y);
+				// bom_die.getBomAnimation().setIndex(picture_die);
+				bom_die.render(g);
+			}
+
+			return;
+		}
 
 		if (isAttack) {
 			attack_update();
 			fire.render(g);
 		}
 		if (moveX == 0 && moveY == 0) {
-
-			// g.drawImage(boss_left.getCurrentImage(Texture.boss_left), (int) x, (int) y, width, height, null);
-
-
-			Graphics2D g2d = (Graphics2D)g;
-			g2d.translate(x, y);
-			g2d.rotate(0.5235987756);
-			g2d.drawImage(boss_down.getCurrentImage(Texture.boss_down),0,0, width, height, null);
-
-
+			System.out.println(player.getY() + " " + this.y);
+			if ((int) player.getY() < (int) y) {
+				System.out.println("up");
+				rotate(g, 1).drawImage(boss_up.getCurrentImage(Texture.boss_up), (int) 0, (int) 0, width, height, null);
+			} else {
+				System.out.println("down");
+				rotate(g, -1).drawImage(boss_down.getCurrentImage(Texture.boss_down), (int) 0, (int) 0, width, height,
+						null);
 			}
-		
+		}
+
 		if (moveX < 0) {
-			g.drawImage(boss_left.getCurrentImage(Texture.boss_left), (int) x, (int) y, width, height, null);
+			g.drawImage(boss_left.getCurrentImage(Texture.boss_left), (int) (x - width / 2), (int) (y - height / 2),
+					width, height, null);
 		}
 		if (moveX > 0) {
 
-			g.drawImage(boss_right.getCurrentImage(Texture.boss_right), (int) x, (int) y, width, height, null);
+			g.drawImage(boss_right.getCurrentImage(Texture.boss_right), (int) (x - width / 2), (int) (y - height / 2),
+					width, height, null);
 
 		}
 		if (moveY < 0) {
-			g.drawImage(boss_up.getCurrentImage(Texture.boss_up), (int) x, (int) y, width, height, null);
+			g.drawImage(boss_up.getCurrentImage(Texture.boss_up), (int) (x - width / 2), (int) (y - height / 2), width,
+					height, null);
 
 		}
 		if (moveY > 0) {
-			g.drawImage(boss_down.getCurrentImage(Texture.boss_down), (int) x, (int) y, width, height, null);
+			g.drawImage(boss_down.getCurrentImage(Texture.boss_down), (int) (x - width / 2), (int) (y - height / 2),
+					width, height, null);
 
 		}
 
