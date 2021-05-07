@@ -35,22 +35,25 @@ public class Boss extends NPC {
 	 */
 	{
 		super(x, y, width, height);
-		System.out.println(this.x + " " + y);
+		// System.out.println(this.x + " " + y);
 		this.player = player;
 		this.game = game;
 
 		// map_world = new map();
 
-		boss_up = new Animation(Texture.boss_up, 100);
-		boss_down = new Animation(Texture.boss_down, 100);
-		boss_left = new Animation(Texture.boss_left, 100);
-		boss_right = new Animation(Texture.boss_right, 100);
+		boss_up = new Animation(Texture.boss_up, 200);
+		boss_down = new Animation(Texture.boss_down, 200);
+		boss_left = new Animation(Texture.boss_left, 200);
+		boss_right = new Animation(Texture.boss_right, 200);
 
 		fire = new Attack(game, 0, 0, 192, 192, 0);
 
 		bom_die = new Bom(game, x, y, 160, 116);
 
 		picture_die = 0;
+
+		Center_x = 600;
+		Center_y = 440;
 
 	}
 
@@ -74,8 +77,8 @@ public class Boss extends NPC {
 	protected void update_move() {
 		if (check_index(player.getX(), player.getY())) {
 			isAttack = true;
-			if (Math.abs(player.getX() - x) >= 10.f) {
-				if (player.getX() > x) {
+			if (Math.abs(player.getX() - x) >= 50.f) {
+				if (player.getX() > x+ 3.0f) {
 					moveX = 3.0f;
 				} else
 					moveX = -3.0f;
@@ -83,9 +86,9 @@ public class Boss extends NPC {
 				return;
 
 			}
-			if (Math.abs(player.getY() - y) >= 10.0f) {
+			if (Math.abs(player.getY() - y) >= 50.0f) {
 
-				if (player.getY() > y) {
+				if (player.getY() > y+ 3.0f) {
 					moveY = 3.0f;
 				} else
 					moveY = -3.0f;

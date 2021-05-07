@@ -11,6 +11,7 @@ import Application.Game;
 public class Player extends Creature {
 
 	private int dem = 0;
+	private int previous_state = 0;
 
 	private boolean isAttack = false;
 	private Game game;
@@ -117,54 +118,75 @@ public class Player extends Creature {
 			isAttack = false;
 	}
 
+	public void drawLeft(Graphics g) {
+		if (!isAttack)
+			g.drawImage(player_left.getCurrentImage(Texture.player_left), (int) x, (int) y, width, height, null);
+		else {
+			g.drawImage(attack_left.getCurrentImage(Texture.attack_left), (int) x, (int) y, width, height, null);
+			dem++;
+		}
+		previous_state = 1;
+	}
+
+	public void drawRight(Graphics g) {
+		if (!isAttack)
+			g.drawImage(player_right.getCurrentImage(Texture.player_right), (int) x, (int) y, width, height, null);
+		else {
+
+			g.drawImage(attack_right.getCurrentImage(Texture.attack_right), (int) x, (int) y, width, height, null);
+			dem++;
+		}
+		previous_state = 2;
+	}
+
+	public void drawUp(Graphics g) {
+		if (!isAttack)
+			g.drawImage(player_up.getCurrentImage(Texture.player_up), (int) x, (int) y, width, height, null);
+		else {
+			g.drawImage(attack_up.getCurrentImage(Texture.attack_up), (int) x, (int) y, width, height, null);
+			dem++;
+		}
+		previous_state = 3;
+	}
+
+	public void drawDown(Graphics g) {
+		if (!isAttack)
+			g.drawImage(player_down.getCurrentImage(Texture.player_down), (int) x, (int) y, width, height, null);
+		else {
+			g.drawImage(attack_down.getCurrentImage(Texture.attack_down), (int) x, (int) y, width, height, null);
+			dem++;
+		}
+		previous_state = 4;
+	}
+
 	@Override
 	public void render(Graphics g) {
 		Time_attack();
 		if (moveX == 0 && moveY == 0) {
-			if (!isAttack) {
-
-				g.drawImage(player_right.getCurrentImage(Texture.player_right), (int) x, (int) y, width, height, null);
-			} else {
-
-				dem += 1;
-				g.drawImage(attack_right.getCurrentImage(Texture.attack_right), (int) x, (int) y, width, height, null);
-
+			if (previous_state == 0) {
+				drawRight(g);
 			}
+			if (previous_state == 1)
+				drawLeft(g);
+			if (previous_state == 2)
+				drawRight(g);
+			if (previous_state == 3)
+				drawUp(g);
+			if (previous_state == 4)
+				drawDown(g);
 		}
 		if (moveX < 0) {
-			if (!isAttack)
-				g.drawImage(player_left.getCurrentImage(Texture.player_left), (int) x, (int) y, width, height, null);
-			else {
-				g.drawImage(attack_left.getCurrentImage(Texture.attack_left), (int) x, (int) y, width, height, null);
-				dem++;
-			}
+			drawLeft(g);
 		}
 		if (moveX > 0) {
-			if (!isAttack)
-				g.drawImage(player_right.getCurrentImage(Texture.player_right), (int) x, (int) y, width, height, null);
-			else {
-
-				g.drawImage(attack_right.getCurrentImage(Texture.attack_right), (int) x, (int) y, width, height, null);
-				dem++;
-			}
+			drawRight(g);
 		}
 		if (moveY < 0) {
-			if (!isAttack)
-				g.drawImage(player_up.getCurrentImage(Texture.player_up), (int) x, (int) y, width, height, null);
-			else {
-				g.drawImage(attack_up.getCurrentImage(Texture.attack_up), (int) x, (int) y, width, height, null);
-				dem++;
-			}
+			drawUp(g);
 		}
 		if (moveY > 0) {
-			if (!isAttack)
-				g.drawImage(player_down.getCurrentImage(Texture.player_down), (int) x, (int) y, width, height, null);
-			else {
-				g.drawImage(attack_down.getCurrentImage(Texture.attack_down), (int) x, (int) y, width, height, null);
-				dem++;
-			}
+			drawDown(g);
 		}
-
 
 	}
 

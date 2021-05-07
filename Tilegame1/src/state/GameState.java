@@ -23,7 +23,7 @@ public class GameState {
 	   player= new Player(game,0,0,32,32);
 
       // Minh sua 
-      boss = new Boss(game, 150,150,70,60, player);
+      boss = new Boss(game, 400,400,105,90, player);
    
       quai = new Knights(10);
       // 

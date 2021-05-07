@@ -5,7 +5,7 @@ package Api;
 import java.awt.Graphics;
 import java.util.concurrent.ThreadLocalRandom;
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
+
 
 
 public class knight extends NPC{
@@ -16,6 +16,7 @@ public class knight extends NPC{
     public knight(float x, float y, int width, int height) {
         super(x, y, width, height);
         R = 50.0;
+        time_npc_move =0;
 
        
 
@@ -62,7 +63,7 @@ public class knight extends NPC{
 
     @Override
     protected void update_move() {
-        if (System.currentTimeMillis() - time_npc_move > 3000 || !check_index(this.x, this.y)) {
+        if (System.currentTimeMillis() - time_npc_move > 1000 || !check_index(this.x, this.y)) {
             time_npc_move = System.currentTimeMillis();
             // rand = Math.random();
             if (ThreadLocalRandom.current().nextInt(1, 100) < 50) {
