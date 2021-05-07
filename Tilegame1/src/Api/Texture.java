@@ -24,6 +24,9 @@ public class Texture {
     public static BufferedImage[] attack_right;
     public static BufferedImage[] attack_left;
 
+	public static BufferedImage darkKnight;
+	public static BufferedImage[] Knight;
+
 
 	public static BufferedImage[] boss_up;
 	public static BufferedImage[] boss_down;
@@ -46,6 +49,7 @@ public class Texture {
 			boss=ImageIO.read(new File("src/assets/flying.png"));
 			bom = ImageIO.read(new File("src/assets/Fire02.png"));
 			fire_blue = ImageIO.read(new File("src/assets/fire_blue.png"));
+			darkKnight = ImageIO.read(new File("src/assets/boss01.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -229,6 +233,18 @@ public class Texture {
 		fire_attack[17] = fire_blue.getSubimage(384, 576, 192,192);
 		fire_attack[18] = fire_blue.getSubimage(576, 576, 192,192);
 		fire_attack[19] = fire_blue.getSubimage(768, 576, 192,192);
+
+
+
+		Knight = new BufferedImage[8];
+		Knight[0] = darkKnight.getSubimage(0,0, 140,140);
+		Knight[1] = darkKnight.getSubimage(140,0, 140,140);
+		Knight[2] = darkKnight.getSubimage(280,0, 140,140);
+		Knight[3] = darkKnight.getSubimage(420,0, 140,140);
+		Knight[4] = darkKnight.getSubimage(558,0, 140,140);
+		Knight[5] = darkKnight.getSubimage(0,149, 140,140);
+		Knight[6] = darkKnight.getSubimage(140,149, 140,140);
+		Knight[7] = darkKnight.getSubimage(280,149, 140,140);
 
 
 

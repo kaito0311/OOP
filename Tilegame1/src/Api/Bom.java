@@ -9,7 +9,6 @@ import java.awt.Graphics;
 
 import Application.Game;
 public class Bom extends Entity{
-    private boolean attack;
     private Game game;
     private Animation bom;
     public Bom(Game game, float x, float y, int width, int height)

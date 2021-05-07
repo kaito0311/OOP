@@ -36,21 +36,13 @@ public class Attack extends Entity {
         moveX = (player_x - this.x)/Texture.getLengthBufferedImage(Texture.fire_attack)*1.2f;
         moveY = (player_y - this.y)/Texture.getLengthBufferedImage(Texture.fire_attack)*1.2f;
         // System.out.println(moveX + " " + moveY);
-
-
-
     }
 
     @Override
     public void tick() {
-        // System.out.println(x + " "+y);
         x += moveX; 
         y += moveY;
-        // System.out.println(x + " "+y);
         attack.update();
-        
-        
-        
     }
 
     public void setIndexAttack(int dem)
