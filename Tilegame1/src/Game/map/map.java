@@ -10,19 +10,24 @@ import java.util.Random;
 
 import Api.Texture;
 import nature.BigTree;
-import nature.Chest;
-import nature.ConcreteColumn;
+import nature.FlagBlack;
+import nature.FlagBlue;
+import nature.FlagRed;
 import nature.Flower;
 import nature.Grass;
 import nature.Grave;
-import nature.Lake;
+import nature.Hedge;
+import nature.House;
+import nature.HouseNormal;
 import nature.Land;
+import nature.Pumpkin;
+import nature.Puppet;
+import nature.RoadSign;
 import nature.Tree;
 import nature.Water;
 
 public class Map {
 	private int map[][];
-	private Lake lake;
 	private Land land;
 	private Tree tree;
 	private Grass grass;
@@ -30,24 +35,41 @@ public class Map {
 	private Flower flower;
 	private BigTree bigTree;
 	private Grave grave;
-	private Chest chest;
-	private ConcreteColumn column;
+	//sua
+	private FlagBlue flagBlue;
+	private FlagBlack flagBlack;
+	private FlagRed flagRed;
+	private House house;
+	private HouseNormal houseNormal;
+	private Pumpkin pumpkin;
+	private Puppet puppet;
+	private Hedge hedge;
+	private RoadSign roadSign;
+	//ket thuc sua
 	public Map(String path) {
 		getMapFromFile(path);
 		init();
 	}
 //	khoi tao cac doi tuong trong map
 	public void init() {
-		lake = new Lake();
 		land = new Land();
 		grass = new Grass();
 		tree = new Tree();
 		water = new Water();
-		chest = new Chest();
 		flower = new Flower();
 		bigTree = new BigTree();
-		column = new ConcreteColumn();
 		grave=new Grave();
+		//sua
+		flagBlue=new FlagBlue();
+		flagBlack=new FlagBlack();
+		flagRed=new FlagRed();
+		house=new House();
+		houseNormal=new HouseNormal();
+		pumpkin=new Pumpkin();
+		puppet=new Puppet();
+		hedge=new Hedge();
+		roadSign=new RoadSign();
+		//ket thuc sua
 	}
 //doc map tu ma tran
 	public void getMapFromFile(String path){
@@ -95,14 +117,15 @@ public class Map {
 					land.render(g, j, i);
 				}else if(map[i][j] == 0){
 					grass.render(g, j, i);
-				}else if(map[i][j] == 18){
+				}else if(map[i][j] >= 16 && map[i][j] <= 19){
 					grass.render(g, j, i);
+					tree.setId(map[i][j]-15);
 					tree.render(g, j, i);
 				} else if(map[i][j] >= 21 && map[i][j] <= 35) {
 					grass.render(g, j, i);
 					water.setId(map[i][j]-20);
 					water.render(g, j, i);
-				}else if(map[i][j] == 16){
+				}else if(map[i][j] == 20){
 					grass.render(g, j, i);
 					flower.render(g, j, i);
 				}else if(map[i][j] >= 41 && map[i][j] <= 56) {
@@ -113,11 +136,63 @@ public class Map {
 				{
 					grass.render(g, j, i);
 					grave.setId(map[i][j]-39);
-					grave.render(g, j, i);
-				}else{
-					chest.setId(0);
-					chest.render(g, j, i);
+					grave.render(g, i, j);
 				}
+				//bat dau sua
+				else if(map[i][j] >= 101 && map[i][j] <= 103)
+				{
+					grass.render(g, j, i);
+					flagBlue.setId(map[i][j]-100);
+					flagBlue.render(g, j, i);
+				}
+				else if(map[i][j] >= 104 && map[i][j] <= 106)
+				{
+					grass.render(g, j, i);
+					flagBlack.setId(map[i][j]-103);
+					flagBlack.render(g, j, i);
+				}
+				else if(map[i][j] >= 107 && map[i][j] <= 109)
+				{
+					grass.render(g, j, i);
+					flagRed.setId(map[i][j]-106);
+					flagRed.render(g, j, i);
+				}
+				else if(map[i][j] >= 110 && map[i][j] <= 129)
+				{
+					grass.render(g, j, i);
+					house.setId(map[i][j]-109);
+					house.render(g, j, i);
+				}
+				else if(map[i][j] >= 130 && map[i][j] <= 147)
+				{
+					grass.render(g, j, i);
+					houseNormal.setId(map[i][j]-129);
+					houseNormal.render(g, j, i);
+				}
+				else if(map[i][j]==90)
+				{
+					grass.render(g, j, i);
+					pumpkin.render(g, j, i);
+				}
+				else if(map[i][j]==92||map[i][j]==93)
+				{
+					grass.render(g, j, i);
+					puppet.setId(map[i][j]-91);
+					puppet.render(g, j, i);
+				}
+				else if(map[i][j] >= 94 && map[i][j] <= 99)
+				{
+					grass.render(g, j, i);
+					hedge.setId(map[i][j]-93);
+					hedge.render(g, j, i);
+				}
+				else if(map[i][j] >= 87 && map[i][j] <= 89)
+				{
+					grass.render(g, j, i);
+					roadSign.setId(map[i][j]-86);
+					roadSign.render(g, j, i);
+				}
+				//ket thuc sua
 			}
 		}
 	}

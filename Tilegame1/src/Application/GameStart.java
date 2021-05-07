@@ -23,11 +23,9 @@ public class GameStart extends JFrame implements ActionListener{
     
     public GameStart() {
     	
-        startGameBackground = new ImageIcon("assets/start_game.png");
-        if(startGameBackground == null) {
-        	System.out.println("Null");
-        }
-        setSize(851,540);
+        startGameBackground = new ImageIcon("src/assets/Start.jpg");
+
+        setSize(640,512);
         setVisible(true);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -37,7 +35,9 @@ public class GameStart extends JFrame implements ActionListener{
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(startGameBackground.getImage(), 0, 0, getWidth(), getHeight(), null);
+                if (startGameBackground != null) {
+                    g.drawImage(startGameBackground.getImage(), 0, 0, getWidth(), getHeight(), null);
+                }
             }
         };
         setContentPane(panel);

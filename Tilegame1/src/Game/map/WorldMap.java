@@ -5,7 +5,7 @@ public class WorldMap {
 	private Map temp;
 	
 	public WorldMap() {
-		worldMap = new Map[3];
+		worldMap = new Map[4];
 		this.AddMap();
 	}
 	
@@ -16,5 +16,7 @@ public class WorldMap {
 	public void AddMap() {
 		worldMap[0] = new Map("src/assets/map.txt");
 		worldMap[1] = new Map("src/assets/map2.txt");
+		worldMap[2] = new Map("src/assets/map3.txt");//sua
+		
 	}
 }
