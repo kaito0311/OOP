@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import Api.KeyAction;
+import Api.Texture;
 import Api.creature.Player;
 import Game.map.*;
 import state.GameState;
@@ -86,6 +87,7 @@ public class Game implements Runnable{          // bo sung KEyEvent
 //			System.out.println(delta);
 			if(delta >=1 )
 			{
+				// System.out.println("loi");
 				update();
 				render();
 				delta -- ;
@@ -98,6 +100,7 @@ public class Game implements Runnable{          // bo sung KEyEvent
 	private void init() {
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(key);
+		Texture.loadTextures();
 		gamestate= new GameState(this);
 	}
 }

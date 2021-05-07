@@ -23,23 +23,27 @@ public class Player extends Creature{
 	    player_down= new Animation(Texture.player_down,300);
 		player_left= new Animation(Texture.player_left,300);
 		player_right= new Animation(Texture.player_right,300);
-
+		
 		attack_up = new Animation(Texture.attack_up,100);
 		attack_down = new Animation(Texture.attack_down,100);
 		attack_left = new Animation(Texture.attack_left,100);
 		attack_right = new Animation(Texture.attack_right,100);
 		
 		
+		// System.out.println("ak");
 	}
 	
 	@Override
 	public void tick(){
 		// System.out.println("ahi");
+
 		move_update();
-		attack_update();checkAttack();
+		attack_update();
+		checkAttack();
 		update();
 		move();
-//		checkAttack();
+		// System.out.println("akaaaaaa");
+		//		checkAttack();
 	}
 	private void move_update() {
 		player_up.update();

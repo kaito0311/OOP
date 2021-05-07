@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 
 public class Texture {
-	public static BufferedImage grass,land,grass_tiny,overworld,water,player,boss;
+	public static BufferedImage grass,land,grass_tiny,overworld,water,player,boss, bom;
 	public static HashMap<String, Image> tiles = new HashMap<>();
 	
 	
@@ -23,7 +23,17 @@ public class Texture {
     public static BufferedImage[] attack_up;
     public static BufferedImage[] attack_right;
     public static BufferedImage[] attack_left;
+
+
+	public static BufferedImage[] boss_up;
+	public static BufferedImage[] boss_down;
+	public static BufferedImage[] boss_left;
 	public static BufferedImage[] boss_right;
+	
+	public static BufferedImage[] bom_bum;
+	public static BufferedImage[] fire_attack;
+	public static BufferedImage fire_blue;
+
 	
 	public static void loadImage() {
 		try {
@@ -33,7 +43,9 @@ public class Texture {
 			overworld = ImageIO.read(new File("src/assets/overworld.png"));
 			water = ImageIO.read(new File("src/assets/water.png"));
 			player= ImageIO.read(new File("src/assets/character.png"));
-			boss=ImageIO.read(new File("src/assets/boss01.png"));
+			boss=ImageIO.read(new File("src/assets/flying.png"));
+			bom = ImageIO.read(new File("src/assets/Fire02.png"));
+			fire_blue = ImageIO.read(new File("src/assets/fire_blue.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -142,16 +154,86 @@ public class Texture {
 
 
 		// load boss image 
-		boss_right = new BufferedImage[8];
+		boss_up = new BufferedImage[3];
+		boss_down = new BufferedImage[3];
+		boss_right = new BufferedImage[3];
+		boss_left = new BufferedImage[3];
+
+
+		boss_up[0] = boss.getSubimage(0, 0, 70, 60);
+		boss_up[1] = boss.getSubimage(75, 0, 70, 60);
+		boss_up[2] = boss.getSubimage(150, 0, 70, 60);
+
+		boss_down[0] = boss.getSubimage(0, 130, 70, 60);
+		boss_down[1] = boss.getSubimage(75, 130, 70, 60);
+		boss_down[2] = boss.getSubimage(150,130, 70, 60);
+
+		boss_right[0] = boss.getSubimage(0, 60, 70, 60);
+		boss_right[1] = boss.getSubimage(75, 60, 70, 60);
+		boss_right[2] = boss.getSubimage(150, 60, 70, 60);
+
+		boss_left[0] = boss.getSubimage(0, 190, 70, 60);
+		boss_left[1] = boss.getSubimage(75, 190, 70, 60);
+		boss_left[2] = boss.getSubimage(150, 190, 70, 60);
+
+		bom_bum = new BufferedImage[25];
+
+		bom_bum[0] = bom.getSubimage(0, 0, 320, 232);
+		bom_bum[1] = bom.getSubimage(320, 0, 320, 232);
+		bom_bum[2] = bom.getSubimage(640, 0, 320, 232);
+		bom_bum[3] = bom.getSubimage(960, 0, 320, 232);
+		bom_bum[4] = bom.getSubimage(1280, 0, 320, 232);
+		bom_bum[5] = bom.getSubimage(0, 232, 320, 232);
+		bom_bum[6] = bom.getSubimage(320, 232, 320, 232);
+		bom_bum[7] = bom.getSubimage(640, 232, 320, 232);
+		bom_bum[8] = bom.getSubimage(960, 232, 320, 232);
+		bom_bum[9] = bom.getSubimage(1280, 232, 320, 232);
+		bom_bum[10] = bom.getSubimage(0, 464, 320, 232);
+		bom_bum[11] = bom.getSubimage(320, 464, 320, 232);
+		bom_bum[12] = bom.getSubimage(640, 464, 320, 232);
+		bom_bum[13] = bom.getSubimage(960, 464, 320, 232);
+		bom_bum[14] = bom.getSubimage(1280, 464, 320, 232);
+		bom_bum[15] = bom.getSubimage(0, 696, 320, 232);
+		bom_bum[16] = bom.getSubimage(320, 696, 320, 232);
+		bom_bum[17] = bom.getSubimage(640, 696, 320, 232);
+		bom_bum[18] = bom.getSubimage(960, 696, 320, 232);
+		bom_bum[19] = bom.getSubimage(1280, 696, 320, 232);
+		bom_bum[20] = bom.getSubimage(0, 696, 320, 232);
+		bom_bum[21] = bom.getSubimage(320, 696, 320, 232);
+		bom_bum[22] = bom.getSubimage(640, 696, 320, 232);
+		bom_bum[23] = bom.getSubimage(960, 696, 320, 232);
+		bom_bum[24] = bom.getSubimage(1280, 696, 320, 232);
+
+
+
+		fire_attack = new BufferedImage[20];
+		
+
+		fire_attack[0] = fire_blue.getSubimage(0, 0, 192,192);
+		fire_attack[1] = fire_blue.getSubimage(192, 0, 192,192);
+		fire_attack[2] = fire_blue.getSubimage(384, 0, 192,192);
+		fire_attack[3] = fire_blue.getSubimage(576, 0, 192,192);
+		fire_attack[4] = fire_blue.getSubimage(768, 0, 192,192);
+		fire_attack[5] = fire_blue.getSubimage(0, 192, 192,192);
+		fire_attack[6] = fire_blue.getSubimage(192, 192, 192,192);
+		fire_attack[7] = fire_blue.getSubimage(384, 192, 192,192);
+		fire_attack[8] = fire_blue.getSubimage(576,192, 192,192);
+		fire_attack[9] = fire_blue.getSubimage(768, 192, 192,192);
+		fire_attack[10] = fire_blue.getSubimage(0, 384, 192,192);
+		fire_attack[11] = fire_blue.getSubimage(192, 384, 192,192);
+		fire_attack[12] = fire_blue.getSubimage(384, 384, 192,192);
+		fire_attack[13] = fire_blue.getSubimage(576, 384, 192,192);
+		fire_attack[14] = fire_blue.getSubimage(768, 384, 192,192);
+		fire_attack[15] = fire_blue.getSubimage(0, 576, 192,192);
+		fire_attack[16] = fire_blue.getSubimage(192, 576, 192,192);
+		fire_attack[17] = fire_blue.getSubimage(384, 576, 192,192);
+		fire_attack[18] = fire_blue.getSubimage(576, 576, 192,192);
+		fire_attack[19] = fire_blue.getSubimage(768, 576, 192,192);
+
+
+
 		 
-		boss_right[0] = boss.getSubimage(0,0, 140, 140);
-		boss_right[1] = boss.getSubimage(140,0, 140, 140);
-		boss_right[2] = boss.getSubimage(280,0, 140, 140);
-		boss_right[3] = boss.getSubimage(420,0, 140, 140);
-		boss_right[4] = boss.getSubimage(558,0, 140,140);
-		boss_right[5] = boss.getSubimage(0,149, 140, 140);
-		boss_right[6] = boss.getSubimage(140,149, 140, 140);
-		boss_right[7] = boss.getSubimage(280,149, 140, 140);
+
 		
 		
 	}
