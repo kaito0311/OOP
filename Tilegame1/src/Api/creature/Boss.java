@@ -41,10 +41,10 @@ public class Boss extends NPC {
 
 		// map_world = new map();
 
-		boss_up = new Animation(Texture.boss_up, 200);
-		boss_down = new Animation(Texture.boss_down, 200);
-		boss_left = new Animation(Texture.boss_left, 200);
-		boss_right = new Animation(Texture.boss_right, 200);
+		boss_up = new Animation(Texture.boss_up, 100);
+		boss_down = new Animation(Texture.boss_down, 100);
+		boss_left = new Animation(Texture.boss_left, 100);
+		boss_right = new Animation(Texture.boss_right, 100);
 
 		fire = new Attack(game, 0, 0, 192, 192, 0);
 
