@@ -132,8 +132,6 @@ public class Player extends Creature{
 				
 				    dem+=1;
 					g.drawImage(attack_right.getCurrentImage(Texture.attack_right), (int)x,(int)y, width,height, null);
-
-					dem++;
 					// Texture.getLengthBufferedImage(Texture.attack_right);
 					// lasttime = System.currentTimeMillis();
 				// isAttack = false;
@@ -143,25 +141,39 @@ public class Player extends Creature{
 			if(!isAttack)
 			g.drawImage(player_left.getCurrentImage(Texture.player_left),(int)x, (int)y,width,height, null);
 			else
+			{
 				g.drawImage(attack_left.getCurrentImage(Texture.attack_left), (int)x,(int)y, width,height, null);
+				dem++;
+			}
 			} 
 		if(moveX>0){
 			if(!isAttack)
 			g.drawImage(player_right.getCurrentImage(Texture.player_right),(int)x, (int)y,width,height, null);
 			else
+			{
+
+
 				g.drawImage(attack_right.getCurrentImage(Texture.attack_right), (int)x,(int)y, width,height, null);
+				dem++;
+			}
 			}
 		if(moveY<0){
 			if(!isAttack)
 			g.drawImage(player_up.getCurrentImage(Texture.player_up),(int)x, (int)y,width,height, null);
 			else
+			{
 				g.drawImage(attack_up.getCurrentImage(Texture.attack_up), (int)x,(int)y, width,height, null);
+				dem++;
+			}
 			} 
 		if(moveY>0){
 			if(!isAttack)
 			g.drawImage(player_down.getCurrentImage(Texture.player_down),(int)x, (int)y,width,height, null);
 			else
+			{
 				g.drawImage(attack_down.getCurrentImage(Texture.attack_down), (int)x,(int)y, width,height, null);
+				dem++;
+			}
 			}
 
 		// Time_attack();

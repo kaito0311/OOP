@@ -177,7 +177,35 @@ public class Boss extends Creature {
 		fire.tick();
 		dem += 1;
 	}
+	
+	
+	private Graphics2D rotate(Graphics g)
+	{
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.translate(x, y);
+		double alpha = 0;
+		float distance_x = player.getX() - this.x ;
+		float distance_y = player.getY() - this.y;
+		if(distance_y <0.000000001)
+		{
+			distance_y = 0.00000001f;
+		}
+		try
+		{
+		alpha = Math.atan((double)(distance_x/distance_y));
+		}
+		catch(ArithmeticException e)
+		{
+			
+		}
+		
 
+		
+
+		g2d.rotate(0.5235987756);
+		 
+		return g2d;
+	}
 	@Override
 	public void render(Graphics g) {
 
@@ -189,8 +217,6 @@ public class Boss extends Creature {
 
 			// g.drawImage(boss_left.getCurrentImage(Texture.boss_left), (int) x, (int) y, width, height, null);
 
-			AffineTransform tx = AffineTransform.getRotateInstance(Math.toRadians(45),width/2, height/2);
-			AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 
 			Graphics2D g2d = (Graphics2D)g;
 			g2d.translate(x, y);
