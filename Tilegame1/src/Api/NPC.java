@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import Api.creature.Creature;
 import Api.creature.Player;
+import Application.Game;
 
 public abstract class NPC extends  Creature {
     // protected float x, y;
@@ -18,11 +19,12 @@ public abstract class NPC extends  Creature {
     protected  float Center_x;
 	protected  float Center_y;
 	protected  double R ;
+	protected Game game;
     
 
-    public NPC(float x, float y, int width, int height)
+    public NPC(Game game,float x, float y, int width, int height)
     {
-        super(x,y,width, height);
+        super(game,x,y,width, height);
         // this.player = player;
         Center_x = 200;
         Center_y = 200;

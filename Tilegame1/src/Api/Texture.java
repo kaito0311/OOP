@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 
 public class Texture {
-	public static BufferedImage grass,land,grass_tiny,overworld,water,player,boss;
+	public static BufferedImage grass,land,grass_tiny,overworld,water,player,boss,house;//sua
 	public static HashMap<String, Image> tiles = new HashMap<>();
 	
 	
@@ -51,9 +51,8 @@ public class Texture {
 			land = ImageIO.read(new File("src/assets/land.png"));
 			grass_tiny = ImageIO.read(new File("src/assets/grass_tiny.png"));
 			overworld = ImageIO.read(new File("src/assets/overworld.png"));
+			house=ImageIO.read(new File("src/assets/house.png"));//sua
 			water = ImageIO.read(new File("src/assets/water.png"));
-
-
 			// Minh sua
 			player = ImageIO.read(new File("src/assets/character.png"));
 			boss = ImageIO.read(new File("src/assets/flying.png"));
@@ -138,27 +137,32 @@ public class Texture {
 		tiles.put("big_tree_16",overworld.getSubimage(32*7, 32*2, 32, 32));
 		tiles.put("grave_0",overworld.getSubimage(32*3, 32*8, 32, 32));
 		tiles.put("grave_1",overworld.getSubimage(32*4, 32*8, 32, 32));
-		tiles.put("lake_1",overworld.getSubimage(32*0, 32*116, 32, 32));
-		tiles.put("lake_2",overworld.getSubimage(32*1, 32*116, 32, 32));
-		tiles.put("lake_3",overworld.getSubimage(32*2, 32*116, 32, 32));
-		tiles.put("lake_4",overworld.getSubimage(32*0, 32*117, 32, 32));
-		tiles.put("lake_5",overworld.getSubimage(32*1, 32*117, 32, 32));
-		tiles.put("lake_6",overworld.getSubimage(32*2, 32*117, 32, 32));
-		tiles.put("lake_7",overworld.getSubimage(32*0, 32*118, 32, 32));
-		tiles.put("lake_8",overworld.getSubimage(32*1, 32*118, 32, 32));
-		tiles.put("lake_9",overworld.getSubimage(32*2, 32*118, 32, 32));
-		tiles.put("column_1",overworld.getSubimage(32*2, 32*113, 32, 32));
-		tiles.put("column_2",overworld.getSubimage(32*2, 32*114, 32, 32));
-		tiles.put("column_3",overworld.getSubimage(32*2, 32*115, 32, 32));
-		tiles.put("chest_close_1",overworld.getSubimage(32*4, 32*107, 32, 32));
-		tiles.put("chest_close_2",overworld.getSubimage(32*5, 32*107, 32, 32));
-		tiles.put("chest_close_3",overworld.getSubimage(32*6, 32*107, 32, 32));
-		tiles.put("chest_close_4",overworld.getSubimage(32*7, 32*107, 32, 32));
-		tiles.put("chest_open_1",overworld.getSubimage(32*4, 32*108, 32, 32));
-		tiles.put("chest_open_2",overworld.getSubimage(32*5, 32*108, 32, 32));
-		tiles.put("chest_open_3",overworld.getSubimage(32*6, 32*108, 32, 32));
-		tiles.put("chest_open_4",overworld.getSubimage(32*7, 32*108, 32, 32));
-		
+		//sua
+		tiles.put("flag_blue_1",house.getSubimage(32*13, 32*0, 32, 32));
+		tiles.put("flag_blue_2",house.getSubimage(32*13, 32*1, 32, 32));
+		tiles.put("flag_blue_3",house.getSubimage(32*13, 32*2, 32, 32));
+		tiles.put("flag_black_1",house.getSubimage(32*13, 32*3, 32, 32));
+		tiles.put("flag_black_2",house.getSubimage(32*13, 32*4, 32, 32));
+		tiles.put("flag_black_3",house.getSubimage(32*13, 32*5, 32, 32));
+		tiles.put("flag_red_1",house.getSubimage(32*15, 32*4, 32, 32));
+		tiles.put("flag_red_2",house.getSubimage(32*15, 32*5, 32, 32));
+		tiles.put("flag_red_3",house.getSubimage(32*15, 32*6, 32, 32));
+		tiles.put("flag_red_3",house.getSubimage(32*15, 32*6, 32, 32));
+		tiles.put("pumpkin",overworld.getSubimage(32*6, 32*20, 32, 32));
+		tiles.put("puppet_1",overworld.getSubimage(32*3, 32*19, 32, 32));
+		tiles.put("puppet_2",overworld.getSubimage(32*3, 32*20, 32, 32));
+		tiles.put("hedge_1",overworld.getSubimage(32*0, 32*22, 32, 32));
+		tiles.put("hedge_2",overworld.getSubimage(32*0, 32*23, 32, 32));
+		tiles.put("hedge_3",overworld.getSubimage(32*2, 32*22, 32, 32));
+		tiles.put("hedge_4",overworld.getSubimage(32*3, 32*22, 32, 32));
+		tiles.put("hedge_5",overworld.getSubimage(32*2, 32*23, 32, 32));
+		tiles.put("hedge_6",overworld.getSubimage(32*3, 32*23, 32, 32));
+		tiles.put("hedge_6",overworld.getSubimage(32*3, 32*23, 32, 32));
+		tiles.put("roadSign_1",overworld.getSubimage(32*2, 32*29, 32, 32));
+		tiles.put("roadSign_2",overworld.getSubimage(32*5, 32*28, 32, 32));
+		tiles.put("roadSign_3",overworld.getSubimage(32*5, 32*29, 32, 32));
+		loadHouse();
+		loadHouseNormal();
 
 		// Minh Sua
 		player_down =  new BufferedImage[4];
@@ -308,5 +312,35 @@ public class Texture {
 
 		
 		// End
+	}
+
+	private static void loadHouse()
+	{
+		int count=0;
+		for(int j=11;j<=14;j++)
+		{
+			for(int i=3;i<=7;i++)
+			{
+				count++;
+				tiles.put("house_"+count,house.getSubimage(32*i, 32*j, 32, 32));
+				
+			}
+		}
+	}
+	
+	private static void loadHouseNormal()
+	{
+		int count=0;
+		for(int j=11;j<=14;j++)
+		{
+			for(int i=11;i<=15;i++)
+			{
+				if(((j==11)&&(i==11))||((j==11)&&(i==15)))
+						continue;
+				count++;
+				tiles.put("house_normal_"+count,house.getSubimage(32*i, 32*j, 32, 32));
+				
+			}
+		}
 	}
 }

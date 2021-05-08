@@ -4,6 +4,9 @@ package Api;
 
 import java.awt.Graphics;
 import java.util.concurrent.ThreadLocalRandom;
+
+import Application.Game;
+
 import java.awt.image.BufferedImage;
 
 
@@ -12,9 +15,10 @@ public class knight extends NPC{
 
     private Animation darkKinght;
     private BufferedImage[] Image;
+    // protected Game game;
 
-    public knight(float x, float y, int width, int height) {
-        super(x, y, width, height);
+    public knight(Game game,float x, float y, int width, int height) {
+        super(game,x, y, width, height);
         R = 50.0;
         time_npc_move =0;
 

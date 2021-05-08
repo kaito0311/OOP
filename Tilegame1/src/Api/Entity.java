@@ -2,6 +2,8 @@ package Api;
 
 import java.awt.Graphics;
 
+import Application.Game;
+
 public abstract class Entity {
 
 	protected float x,y;// chinh lai o cac cho khac tu int o thanh (int)(o)
@@ -10,6 +12,7 @@ public abstract class Entity {
 	protected boolean dead = false;
 	
 	protected int HP, maxHP;
+	public Game game;
 
 	
 	public float getX() {
@@ -44,13 +47,13 @@ public abstract class Entity {
 	public void setHeight(int height) {
 		this.height = height;
 	}
-	
 
-	public Entity(float x, float y, int width, int height) {
+	public Entity(Game game,float x, float y, int width, int height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.game = game;
 		
 	}
 	

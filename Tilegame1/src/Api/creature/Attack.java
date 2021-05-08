@@ -15,8 +15,8 @@ public class Attack extends Entity {
 
     public Attack(Game game,float x, float y, int width, int height , int dem)
     {
-        super( x, y, width, height);
-        this.game = game;
+        super(game,x, y, width, height);
+        
         attack = new Animation(Texture.fire_attack, 150);
         this.dem = dem;
     }

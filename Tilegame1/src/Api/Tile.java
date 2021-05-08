@@ -14,6 +14,14 @@ public abstract class Tile {
 		this.image = image;
 	}
 
+	public int getWidth()
+	{
+		return width;
+	}
+	public int getHeight()
+	{
+		return height;
+	}
 	public int getX() {
 		return x;
 	}

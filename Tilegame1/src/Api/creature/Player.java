@@ -2,11 +2,13 @@
 
 package Api.creature;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import Api.Animation;
 import Api.Texture;
 import Application.Game;
+import java.awt.Rectangle;
 
 public class Player extends Creature {
 
@@ -14,14 +16,19 @@ public class Player extends Creature {
 	private int previous_state = 0;
 
 	private boolean isAttack = false;
-	private Game game;
+	// Rectangle bounds;
+	// private Game game;
 	private Animation player_up, player_down, player_right, player_left;
 	private Animation attack_up, attack_down, attack_right, attack_left;
 	private long cooldown = 1000, time = 5000, lasttime = 0; // thoi gian delay don danh , thoi gian do khoang cach 2 la
 
 	public Player(Game game, float x, float y, int width, int height) {
-		super(x, y, width, height);
-		this.game = game;
+		super(game,x, y, width, height);
+		if(this.game == null)
+		{
+			System.out.println("ha");
+		}
+		// this.game = game;
 		player_up = new Animation(Texture.player_up, 300);
 		player_down = new Animation(Texture.player_down, 300);
 		player_left = new Animation(Texture.player_left, 300);
@@ -31,6 +38,13 @@ public class Player extends Creature {
 		attack_down = new Animation(Texture.attack_down, 100);
 		attack_left = new Animation(Texture.attack_left, 100);
 		attack_right = new Animation(Texture.attack_right, 100);
+
+		bounds.x = 2; 
+		bounds.y = 2;
+		bounds.width = 20;
+		bounds.height = 20;
+
+
 
 		// System.out.println("ak");
 	}
@@ -162,6 +176,9 @@ public class Player extends Creature {
 	@Override
 	public void render(Graphics g) {
 		Time_attack();
+		
+		g.setColor(Color.BLACK);
+		g.fillRect((int)x,(int) y, 32, 32);
 		if (moveX == 0 && moveY == 0) {
 			if (previous_state == 0) {
 				drawRight(g);

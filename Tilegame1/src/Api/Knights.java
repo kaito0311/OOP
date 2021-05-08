@@ -3,15 +3,20 @@
 package Api;
 import java.awt.Graphics;
 import java.util.concurrent.ThreadLocalRandom;
+
+import Application.Game;
+
 import java.awt.image.BufferedImage;
 public class Knights {
     private knight[] npc;
     private int count_NPC;
+    private Game game;
 
-    public  Knights(int count_NPC)
+    public  Knights(Game game,int count_NPC)
     {
         this.count_NPC = count_NPC;
         npc = new knight[count_NPC];
+        this.game = game;
 
         init();
 
@@ -35,7 +40,7 @@ public class Knights {
             
             center_x = ThreadLocalRandom.current().nextInt(1, 700);
             center_y = ThreadLocalRandom.current().nextInt(1,590);
-            npc[i] = new knight(center_x, center_y, 32, 32);
+            npc[i] = new knight(game,center_x, center_y, 32, 32);
             npc[i].setCenter_x(center_x);
             npc[i].setCenter_y(center_y);
             npc[i].setAnimationImage(randomImage(i%4));

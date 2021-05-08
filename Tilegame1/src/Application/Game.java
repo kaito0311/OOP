@@ -25,7 +25,7 @@ public class Game implements Runnable { // bo sung KEyEvent
 	private BufferStrategy bs;
 	private Graphics g;
 	private String audioFilePath;
-	private Sound audio;
+	   private Sound audio;
 
 	public Game(String title, int width, int height) {
 		this.width = width;
@@ -44,7 +44,7 @@ public class Game implements Runnable { // bo sung KEyEvent
 		thread.start();
 		audioFilePath = "nhac.wav";
 		audio = new Sound(audioFilePath);
-		// audio.start();
+		audio.start();
 	}
 
 	public synchronized void stop() {
@@ -113,12 +113,20 @@ public class Game implements Runnable { // bo sung KEyEvent
 	private void init() {
 
 		worldMap = new WorldMap();
-		temp = worldMap.getMap(1);
+		temp = worldMap.getMap(0);
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(key);
 		// minh sua
-		Texture.loadTextures();
+		// Texture.loadTextures();
 		// end
 		gamestate = new GameState(this);
+	}
+
+	public Map getTemp() {
+		return temp;
+	}
+
+	public void setTemp(Map temp) {
+		this.temp = temp;
 	}
 }
