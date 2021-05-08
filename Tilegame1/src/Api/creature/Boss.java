@@ -18,8 +18,7 @@ public class Boss extends NPC {
 	private int picture_attack = 0;
 	private int picture_die = 0;
 
-	private Game game;
-
+	// private Game game;
 	private Animation boss_up, boss_down, boss_right, boss_left;
 
 	private Attack fire;
@@ -54,6 +53,8 @@ public class Boss extends NPC {
 
 		Center_x = 600;
 		Center_y = 440;
+
+		this.health = 50;
 
 	}
 
@@ -131,13 +132,16 @@ public class Boss extends NPC {
 		// System.out.println(picture_attack);
 		if (picture_attack == 0) {
 			// System.out.println("sg");
-			fire.setToado(x , y );
+			if(player.getY() < y) 
+			fire.setToado(x, y-2);
+			else fire.setToado(x, y+10);
 			fire.setRoad(player.getX(), player.getY());
-			picture_attack += 1;
 		}
 
-		fire.tick();
+		fire.setIndexAttack(picture_attack);
 		picture_attack += 1;
+		fire.tick();
+		System.out.println(fire.checkAttack(player.getX(), player.getY()));
 	}
 
 	private Graphics2D rotate(Graphics g, int up_down) {
@@ -172,8 +176,13 @@ public class Boss extends NPC {
 
 	@Override
 	public void render(Graphics g) {
+		g.setColor(Color.gray);
+		g.fillRect((int) x - 24, (int) y - 30, 50, 4);
+		g.setColor(Color.red);
+		g.fillRect((int) x - 24, (int) y - 30, health - 10, 4);
 
-		// System.out.println(x + " " + Center_x);
+
+		
 
 		if (dead) {
 			if (picture_die < bom_die.getBomAnimation().getImageLength()) {

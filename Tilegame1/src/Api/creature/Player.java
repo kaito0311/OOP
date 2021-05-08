@@ -43,7 +43,7 @@ public class Player extends Creature {
 		bounds.y = 2;
 		bounds.width = 20;
 		bounds.height = 20;
-
+		this.health = maxHealth;
 
 
 		// System.out.println("ak");
@@ -131,6 +131,10 @@ public class Player extends Creature {
 		} else
 			isAttack = false;
 	}
+	public void die() {
+		System.out.println("YOU LOSE");
+	}
+
 
 	public void drawLeft(Graphics g) {
 		if (!isAttack)

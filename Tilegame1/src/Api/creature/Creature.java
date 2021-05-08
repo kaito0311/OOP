@@ -7,7 +7,8 @@ import java.awt.Rectangle;
 
 public abstract class Creature extends Entity{
 	
-	protected int health,maxHealth;
+	protected int health;
+	public static final int maxHealth = 30;
 	protected float speed;
 	protected float moveX, moveY;
 	// protected Game game;
@@ -17,18 +18,29 @@ public abstract class Creature extends Entity{
 		super(game, x, y, width, height);
 		moveX=0;
 		moveY=0;
-		bounds = new Rectangle(2,2,20,20);
+		bounds = new Rectangle(0, 0, width, height);
 		
 
 //		health = HEALTH;
 //		speed = SPEED;
 	}
     public void update(float delta) {
-		
-		if (health > maxHealth) health = maxHealth;
-        if (health <= 0) {
-            health = 0;
-        }
+
+		if (health > maxHealth)
+			health = maxHealth;
+		if (health <= 0) {
+			health = 0;
+		}
+	}
+	public void die() {
+
+	}
+	public void hurt(int damage) {
+		health -= damage;
+		if (health <= 0) {
+			dead = true;
+			die();
+		}
 	}
 	public int getHealth() {
 		return health;
@@ -63,6 +75,7 @@ public abstract class Creature extends Entity{
 	}
 	public void moveX()
 	{
+		if( (x+ moveX )<= 0||(int)( x + moveX) >= 790 ) return;
 		if(moveX >0)
 		{
 			int tx = (int) (x + moveX + bounds.x+ bounds.width)/32;
@@ -95,6 +108,7 @@ public abstract class Creature extends Entity{
 	}
 	public void moveY()
 	{
+		if( y + moveY <= 0 || (y + moveY)>= 630) return;
 		if(moveY <0)
 		{
 			int ty = (int)((y + moveY +bounds.y)/32);
