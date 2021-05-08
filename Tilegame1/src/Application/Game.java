@@ -117,8 +117,16 @@ public class Game implements Runnable { // bo sung KEyEvent
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(key);
 		// minh sua
-		Texture.loadTextures();
+		// Texture.loadTextures();
 		// end
 		gamestate = new GameState(this);
+	}
+
+	public Map getTemp() {
+		return temp;
+	}
+
+	public void setTemp(Map temp) {
+		this.temp = temp;
 	}
 }

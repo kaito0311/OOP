@@ -34,10 +34,10 @@ public class Boss extends NPC {
 	 * doi tuong cau lua
 	 */
 	{
-		super(x, y, width, height);
+		super(game,x, y, width, height);
 		// System.out.println(this.x + " " + y);
 		this.player = player;
-		this.game = game;
+
 
 		// map_world = new map();
 

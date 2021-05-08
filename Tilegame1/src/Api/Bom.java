@@ -11,12 +11,12 @@ import java.awt.Graphics;
 
 import Application.Game;
 public class Bom extends Entity{
-    private Game game;
+    // private Game game;
     private Animation bom;
     public Bom(Game game, float x, float y, int width, int height)
     {
-        super(x,y,width,height);
-        this.game = game;
+        super(game, x,y,width,height);
+        
         bom = new Animation(Texture.bom_bum,100);
     }
 
