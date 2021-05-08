@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class GameStart extends JFrame implements ActionListener{
+	public static float MAX_WIDTH = 800;
+	public static float MAX_HEIGHT = 640;
     private ImageIcon startGameBackground;
     private JPanel panel;
     private JButton newGame;
@@ -32,7 +34,7 @@ public class GameStart extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      
         panel = new JPanel() {
-            @Override
+            
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 if (startGameBackground != null) {
@@ -63,13 +65,13 @@ public class GameStart extends JFrame implements ActionListener{
         aboutUs.addActionListener(this);    
     }
     
-    @Override
+   
     public void actionPerformed(ActionEvent e){
         JButton btn =(JButton) e.getSource();
         
         if (btn == newGame){
             this.dispose();
-            Game game = new Game("Game", 800, 640);
+            Game game = new Game("Game", (int)MAX_WIDTH, (int)MAX_HEIGHT);
             game.start();
         }
         

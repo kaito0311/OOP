@@ -39,7 +39,7 @@ public class Knights {
         {
             
             center_x = ThreadLocalRandom.current().nextInt(1, 700);
-            center_y = ThreadLocalRandom.current().nextInt(1,590);
+            center_y = ThreadLocalRandom.current().nextInt(1,500);
             npc[i] = new knight(game,center_x, center_y, 32, 32);
             npc[i].setCenter_x(center_x);
             npc[i].setCenter_y(center_y);

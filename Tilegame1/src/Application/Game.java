@@ -83,7 +83,7 @@ public class Game implements Runnable { // bo sung KEyEvent
 		return key;
 	}
 
-	@Override
+	
 	public void run() {
 		init();
 

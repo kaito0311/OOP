@@ -5,26 +5,23 @@ import Api.Tile;
 import Application.Game;
 import java.awt.Rectangle;
 
-public abstract class Creature extends Entity{
-	
+public abstract class Creature extends Entity {
+
 	protected int health;
 	public static final int maxHealth = 30;
 	protected float speed;
 	protected float moveX, moveY;
 	// protected Game game;
 	protected Rectangle bounds;
-	
-	public Creature(Game game,float x, float y, int width, int height) {
-		super(game, x, y, width, height);
-		moveX=0;
-		moveY=0;
-		bounds = new Rectangle(0, 0, width, height);
-		
 
-//		health = HEALTH;
-//		speed = SPEED;
+	public Creature(Game game, float x, float y, int width, int height) {
+		super(game, x, y, width, height);
+		moveX = 0;
+		moveY = 0;
+		bounds = new Rectangle(0, 0, width, height);
 	}
-    public void update(float delta) {
+
+	public void update(float delta) {
 
 		if (health > maxHealth)
 			health = maxHealth;
@@ -32,16 +29,20 @@ public abstract class Creature extends Entity{
 			health = 0;
 		}
 	}
+
 	public void die() {
 
 	}
+
 	public void hurt(int damage) {
+		System.out.println("dau day");
 		health -= damage;
 		if (health <= 0) {
 			dead = true;
 			die();
 		}
 	}
+
 	public int getHealth() {
 		return health;
 	}
@@ -73,79 +74,65 @@ public abstract class Creature extends Entity{
 	public void setMoveY(float moveY) {
 		this.moveY = moveY;
 	}
-	public void moveX()
-	{
+
+	public void moveX() {
 		if( (x+ moveX )<= 0||(int)( x + moveX) >= 790 ) return;
-		if(moveX >0)
-		{
-			int tx = (int) (x + moveX + bounds.x+ bounds.width)/32;
-			int ty = (int) ( y + bounds.y)/32;
-			int tyY = (int)(y + bounds.y + bounds.height)/32;
-			if(!collisionWithTile(tx, ty) && !collisionWithTile(tx,tyY))
-			{
+		if (moveX > 0) {
+			int tx = (int) (x + moveX + bounds.x + bounds.width) / 32;
+			int ty = (int) (y + bounds.y) / 32;
+			int tyY = (int) (y + bounds.y + bounds.height) / 32;
+			if (!collisionWithTile(tx, ty) && !collisionWithTile(tx, tyY)) {
 				x += moveX;
+			} else {
+				x = tx * 32 + -bounds.width - 1 - bounds.x;
 			}
-			else
-			{
-				x = tx*32+ -bounds.width-1 - bounds.x;
-			}
-		}
-		else if ( moveX < 0)
-		{
-			int tx = (int) (x + moveX + bounds.x)/32;
-			int ty = (int) ( y + bounds.y)/32;
-			int tyY = (int)(y + bounds.y + bounds.height)/32;
-			if(!collisionWithTile(tx, ty) && !collisionWithTile(tx,tyY))
-			{
+		} else if (moveX < 0) {
+			int tx = (int) (x + moveX + bounds.x) / 32;
+			int ty = (int) (y + bounds.y) / 32;
+			int tyY = (int) (y + bounds.y + bounds.height) / 32;
+			if (!collisionWithTile(tx, ty) && !collisionWithTile(tx, tyY)) {
 				x += moveX;
-			}
-			else
-			{
-				x = tx*32 + 32 - bounds.x;
+			} else {
+				x = tx * 32 + 32 - bounds.x;
 			}
 		}
 
 	}
-	public void moveY()
-	{
+
+	public void moveY() {
 		if( y + moveY <= 0 || (y + moveY)>= 630) return;
-		if(moveY <0)
-		{
-			int ty = (int)((y + moveY +bounds.y)/32);
-			if(!collisionWithTile((int)(x + bounds.x)/32, ty)
-					&& !collisionWithTile((int)(x + bounds.x + bounds.width)/32, ty))
-			{
-				y+= moveY;
-			}
-			else
-			{
-				y = ty*32 + 32 - bounds.y ;
-			}
-		}
-		else if(moveY > 0)
-		{
-			int ty = (int) (y + moveY + bounds.y + bounds.height) / 32;
-			
-			if(!collisionWithTile((int) (x + bounds.x) / 32, ty) &&
-					!collisionWithTile((int) (x + bounds.x + bounds.width) / 32, ty)){
+		if (moveY < 0) {
+			int ty = (int) ((y + moveY + bounds.y) / 32);
+			if (!collisionWithTile((int) (x + bounds.x) / 32, ty)
+					&& !collisionWithTile((int) (x + bounds.x + bounds.width) / 32, ty)) {
 				y += moveY;
-			}else{
+			} else {
+				y = ty * 32 + 32 - bounds.y;
+			}
+		} else if (moveY > 0) {
+			int ty = (int) (y + moveY + bounds.y + bounds.height) / 32;
+
+			if (!collisionWithTile((int) (x + bounds.x) / 32, ty)
+					&& !collisionWithTile((int) (x + bounds.x + bounds.width) / 32, ty)) {
+				y += moveY;
+			} else {
 				y = ty * 32 - bounds.y - bounds.height - 1;
 			}
 		}
 	}
-	
-	
-	public void move(){
+
+	public void move() {
 		moveX();
 		moveY();
 	}
-	protected boolean collisionWithTile(int x, int y)
-	{
-		if(game.getTemp().getIsRock(x, y) == 1)
+
+	protected boolean collisionWithTile(int x, int y) {
+		// System.out.println(x + " " + y);
+		if (game.getTemp().getIsRock(x, y) == 1)
 			return true;
-		else return false;
+		else
+			return false;
 
 	}
-	
+
 }

@@ -23,9 +23,9 @@ public class GameState {
 	   player= new Player(game,96,96,32,32);
 
       // Minh sua 
-      boss = new Boss(game, 400,400,105,90, player);
+      boss = new Boss(game, 300,300,105,90, player);
    
-      quai = new Knights(game,10);
+      // quai = new Knights(game,10);
       // 
    }
    public void update() {
@@ -33,14 +33,14 @@ public class GameState {
 
       // Minh sua 
       boss.tick();
-      quai.tick();
+      // quai.tick();
       // end 
    }
    public void render(Graphics g) {
 	   player.render(g);
 
       // Minh sua 
-      quai.render(g);
+      // quai.render(g);
       boss.render(g);
       // end 
    }

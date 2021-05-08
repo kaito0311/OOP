@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import Api.Animation;
 import Api.Texture;
 import Application.Game;
+import Application.GameStart;
+
 import java.awt.Rectangle;
 
 public class Player extends Creature {
@@ -43,7 +45,8 @@ public class Player extends Creature {
 		bounds.y = 2;
 		bounds.width = 20;
 		bounds.height = 20;
-		this.health = maxHealth;
+		this.health = 100;
+
 
 
 		// System.out.println("ak");
@@ -76,17 +79,18 @@ public class Player extends Creature {
 		attack_left.update();
 	}
 
+
 	private void update() { // update vi tri
 		moveX = 0.f;
 		moveY = 0.f;
 		if (game.getKeyaction().up)
-			moveY = -3.5f;
+			if(y > 0) moveY = -3.5f;
 		if (game.getKeyaction().down)
-			moveY = 3.5f;
+			if(y < GameStart.MAX_HEIGHT - 32) moveY = 3.5f;
 		if (game.getKeyaction().left)
-			moveX = -3.5f;
+			if(x > 0) moveX = -3.5f;
 		if (game.getKeyaction().right)
-			moveX = 3.5f;
+			if(x < GameStart.MAX_WIDTH - 32) moveX = 3.5f;
 		if (game.getKeyaction().attack) {
 			isAttack = true;
 		}
@@ -134,7 +138,6 @@ public class Player extends Creature {
 	public void die() {
 		System.out.println("YOU LOSE");
 	}
-
 
 	public void drawLeft(Graphics g) {
 		if (!isAttack)
@@ -208,7 +211,17 @@ public class Player extends Creature {
 		if (moveY > 0) {
 			drawDown(g);
 		}
+		g.setColor(Color.white);
+		g.fillRect((int) x, (int) y - 4, 30, 4);
+		g.setColor(Color.red);
+		g.fillRect((int) x, (int) y - 4, health, 4);
+
+		// ve bound quanh player
+		g.setColor(Color.red);
+		g.fillRect((int) x + bounds.x / 2, (int) y + bounds.y / 2, bounds.width, bounds.height);
 
 	}
+
+	
 
 }

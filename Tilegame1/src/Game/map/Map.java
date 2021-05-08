@@ -128,7 +128,7 @@ public class Map {
 	{
 		int a = y;
 		int b = x;
-		System.out.println(a + " " + b + " " + isRock[map[a][b]] );
+		// System.out.println(a + " " + b + " " + isRock[map[a][b]] );
 		return isRock[map[a][b]];
 	}
 

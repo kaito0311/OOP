@@ -5,7 +5,7 @@ package Api;
 import java.awt.Graphics;
 import java.util.concurrent.ThreadLocalRandom;
 
-import Application.Game;
+import Application.Game;import java.awt.Color;
 
 import java.awt.image.BufferedImage;
 
@@ -21,6 +21,7 @@ public class knight extends NPC{
         super(game,x, y, width, height);
         R = 50.0;
         time_npc_move =0;
+        this.health = 15;
 
        
 
@@ -62,6 +63,12 @@ public class knight extends NPC{
     @Override
     public void render(Graphics g) {
         g.drawImage(getAnimationImage().getCurrentImage(getImage()), (int)x, (int)y, 32,32,null);
+        g.setColor(Color.gray);
+        g.fillRect((int) x + 10, (int) y - 4, 15, 4); //
+        g.setColor(Color.red);
+        g.fillRect((int) x + 10, (int) y - 4, health, 4);
+        g.setColor(Color.green);
+        g.fillRect((int) x, (int) y, bounds.width, bounds.height);
         
     }
 

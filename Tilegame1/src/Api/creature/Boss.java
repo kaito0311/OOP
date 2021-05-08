@@ -33,10 +33,9 @@ public class Boss extends NPC {
 	 * doi tuong cau lua
 	 */
 	{
-		super(game,x, y, width, height);
+		super(game, x, y, width, height);
 		// System.out.println(this.x + " " + y);
 		this.player = player;
-
 
 		// map_world = new map();
 
@@ -51,8 +50,8 @@ public class Boss extends NPC {
 
 		picture_die = 0;
 
-		Center_x = 600;
-		Center_y = 440;
+		Center_x = 300;
+		Center_y = 300;
 
 		this.health = 50;
 
@@ -79,7 +78,7 @@ public class Boss extends NPC {
 		if (check_index(player.getX(), player.getY())) {
 			isAttack = true;
 			if (Math.abs(player.getX() - x) >= 50.f) {
-				if (player.getX() > x+ 3.0f) {
+				if (player.getX() > x + 3.0f) {
 					moveX = 3.0f;
 				} else
 					moveX = -3.0f;
@@ -89,7 +88,7 @@ public class Boss extends NPC {
 			}
 			if (Math.abs(player.getY() - y) >= 50.0f) {
 
-				if (player.getY() > y+ 3.0f) {
+				if (player.getY() > y + 3.0f) {
 					moveY = 3.0f;
 				} else
 					moveY = -3.0f;
@@ -122,32 +121,55 @@ public class Boss extends NPC {
 
 		}
 	}
+	public void moveX()
+	{
+		if( (x+ moveX )<= 0||(int)( x + moveX) >= 790 ) return;
+		x += moveX;
+	}
+
+	public void moveY()
+	{
+		if( y + moveY <= 0 || (y + moveY)>= 630) return;
+		y += moveY;
+	}
 
 	@Override
 	protected void attack_update() {
-		if (picture_attack >= Texture.fire_attack.length) {
+		if (picture_attack >= Texture.getLengthBufferedImage(Texture.fire_attack)) {
 			picture_attack = 0;
+			fire.setIsBreak(false);
 			fire.setIndexAttack(picture_attack);
+			System.out.println("Boss attack");
 		}
-		// System.out.println(picture_attack);
+
 		if (picture_attack == 0) {
-			// System.out.println("sg");
 			if(player.getY() < y) 
 			fire.setToado(x, y-2);
 			else fire.setToado(x, y+10);
 			fire.setRoad(player.getX(), player.getY());
+			// picture_attack += 1;
 		}
 
 		fire.setIndexAttack(picture_attack);
 		picture_attack += 1;
 		fire.tick();
-		System.out.println(fire.checkAttack(player.getX(), player.getY()));
+		// System.out.println(fire.checkAttack(player.getX(), player.getY()));
+		if(getCheckAttack(player.getX(), player.getY()))
+		{
+			player.hurt(1);
+			fire.setIsBreak(true);
+		}
+		
 	}
 
+	public boolean getCheckAttack(float x, float y)
+	{
+		return fire.checkAttack(x, y);
+	}
 	private Graphics2D rotate(Graphics g, int up_down) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.translate((int) (x), (int) (y));
-		
+
 		// System.out.println(x + " " + y);
 		float distance_x = player.getX() - this.x;
 		float distance_y = this.y - player.getY();
@@ -167,8 +189,7 @@ public class Boss extends NPC {
 		return g2d;
 	}
 
-	private void unrotate(Graphics g)
-	{
+	private void unrotate(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.translate(0, 0);
 		g2d.rotate(-alpha);
@@ -181,8 +202,7 @@ public class Boss extends NPC {
 		g.setColor(Color.red);
 		g.fillRect((int) x - 24, (int) y - 30, health - 10, 4);
 
-
-		
+		// System.out.println(x + " " + Center_x);
 
 		if (dead) {
 			if (picture_die < bom_die.getBomAnimation().getImageLength()) {
@@ -198,11 +218,12 @@ public class Boss extends NPC {
 		if (isAttack) {
 			attack_update();
 			fire.render(g);
+			// System.out.println(fire.checkAttack(player.getX(), player.getY()));
 		}
 		if (moveX == 0 && moveY == 0) {
 			// System.out.println(player.getY() + " " + this.y);/
 			if ((int) player.getY() < (int) y) {
-				System.out.println("up");
+				// System.out.println("up");
 				rotate(g, 1).drawImage(boss_up.getCurrentImage(Texture.boss_up), (int) 0, (int) 0, width, height, null);
 			} else {
 				// System.out.println("down");
