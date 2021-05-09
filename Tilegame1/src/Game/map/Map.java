@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Api.Knights;
 import Api.Texture;
 import nature.BigTree;
 import nature.FlagBlack;
@@ -121,14 +122,12 @@ public class Map {
 
 	}
 
-
 	//
 
-	public int getIsRock(int x, int y)
-	{
+	public int getIsRock(int x, int y) {
 		int a = y;
 		int b = x;
-		// System.out.println(a + " " + b + " " + isRock[map[a][b]] );
+		// System.out.println(a + " " + b + " " + isRock[map[a][b]]);
 		return isRock[map[a][b]];
 	}
 
@@ -154,6 +153,7 @@ public class Map {
 					grass.render(g, j, i);
 					water.setId(map[i][j] - 20);
 					water.render(g, j, i);
+					isRock[map[i][j]] = 1;
 				} else if (map[i][j] == 20) {
 					grass.render(g, j, i);
 					flower.render(g, j, i);
@@ -171,6 +171,9 @@ public class Map {
 					grass.render(g, j, i);
 					grave.setId(map[i][j] - 39);
 					grave.render(g, i, j);
+
+					isRock[map[i][j]] = 1;
+
 				}
 				// bat dau sua
 				else if (map[i][j] >= 101 && map[i][j] <= 103) {
@@ -189,7 +192,7 @@ public class Map {
 					grass.render(g, j, i);
 					house.setId(map[i][j] - 109);
 					house.render(g, j, i);
-					
+
 					isRock[map[i][j]] = 1;
 
 				} else if (map[i][j] >= 130 && map[i][j] <= 147) {

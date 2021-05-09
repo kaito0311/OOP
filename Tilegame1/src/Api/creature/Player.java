@@ -6,31 +6,35 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import Api.Animation;
+// import Api.Knights;
 import Api.Texture;
 import Application.Game;
 import Application.GameStart;
+// import state.GameState;
 
-import java.awt.Rectangle;
+// import java.awt.Rectangle;
 
 public class Player extends Creature {
 
 	private int dem = 0;
 	private int previous_state = 0;
-
+	private int damage;
 	private boolean isAttack = false;
 	// Rectangle bounds;
 	// private Game game;
 	private Animation player_up, player_down, player_right, player_left;
 	private Animation attack_up, attack_down, attack_right, attack_left;
 	private long cooldown = 1000, time = 5000, lasttime = 0; // thoi gian delay don danh , thoi gian do khoang cach 2 la
+	// private Knights npc;
 
 	public Player(Game game, float x, float y, int width, int height) {
-		super(game,x, y, width, height);
-		if(this.game == null)
-		{
+		super(game, x, y, width, height);
+		if (this.game == null) {
 			System.out.println("ha");
 		}
 		// this.game = game;
+		this.damage = 5;
+		this.health = 300;
 		player_up = new Animation(Texture.player_up, 300);
 		player_down = new Animation(Texture.player_down, 300);
 		player_left = new Animation(Texture.player_left, 300);
@@ -41,13 +45,10 @@ public class Player extends Creature {
 		attack_left = new Animation(Texture.attack_left, 100);
 		attack_right = new Animation(Texture.attack_right, 100);
 
-		bounds.x = 2; 
+		bounds.x = 2;
 		bounds.y = 2;
-		bounds.width = 20;
-		bounds.height = 20;
-		this.health = 100;
-
-
+		bounds.width = 16;
+		bounds.height = 16;
 
 		// System.out.println("ak");
 	}
@@ -61,6 +62,7 @@ public class Player extends Creature {
 		checkAttack();
 		update();
 		move();
+
 		// System.out.println("akaaaaaa");
 		// checkAttack();
 	}
@@ -79,22 +81,33 @@ public class Player extends Creature {
 		attack_left.update();
 	}
 
-
 	private void update() { // update vi tri
 		moveX = 0.f;
 		moveY = 0.f;
 		if (game.getKeyaction().up)
-			if(y > 0) moveY = -3.5f;
+			if (y > 0)
+				moveY = -3.5f;
 		if (game.getKeyaction().down)
-			if(y < GameStart.MAX_HEIGHT - 32) moveY = 3.5f;
+			if (y < GameStart.MAX_HEIGHT - 32)
+				moveY = 3.5f;
 		if (game.getKeyaction().left)
-			if(x > 0) moveX = -3.5f;
+			if (x > 0)
+				moveX = -3.5f;
 		if (game.getKeyaction().right)
-			if(x < GameStart.MAX_WIDTH - 32) moveX = 3.5f;
+			if (x < GameStart.MAX_WIDTH - 32)
+				moveX = 3.5f;
 		if (game.getKeyaction().attack) {
 			isAttack = true;
 		}
 		// else isAttack=false;
+	}
+
+	public boolean isAttack() {
+		return isAttack;
+	}
+
+	public int getDamage() {
+		return this.damage;
 	}
 
 	private boolean checkAttack() {
@@ -135,6 +148,7 @@ public class Player extends Creature {
 		} else
 			isAttack = false;
 	}
+
 	public void die() {
 		System.out.println("YOU LOSE");
 	}
@@ -179,13 +193,20 @@ public class Player extends Creature {
 		}
 		previous_state = 4;
 	}
+	public void hurt(int damage) {
+		System.out.println("dau ");
+		health -= damage;
+		if (health <= 0) {
+			dead = true;
+			die();
+		}
+	}
 
 	@Override
 	public void render(Graphics g) {
 		Time_attack();
-		
-		g.setColor(Color.BLACK);
-		g.fillRect((int)x,(int) y, 32, 32);
+
+		// g.fillRect((int) x, (int) y, 32, 32);
 		if (moveX == 0 && moveY == 0) {
 			if (previous_state == 0) {
 				drawRight(g);
@@ -211,17 +232,13 @@ public class Player extends Creature {
 		if (moveY > 0) {
 			drawDown(g);
 		}
-		g.setColor(Color.white);
+		g.setColor(Color.green);
 		g.fillRect((int) x, (int) y - 4, 30, 4);
 		g.setColor(Color.red);
-		g.fillRect((int) x, (int) y - 4, health, 4);
+		g.fillRect((int) x, (int) y - 4, health / 10, 4);
 
 		// ve bound quanh player
-		g.setColor(Color.red);
-		g.fillRect((int) x + bounds.x / 2, (int) y + bounds.y / 2, bounds.width, bounds.height);
 
 	}
-
-	
 
 }

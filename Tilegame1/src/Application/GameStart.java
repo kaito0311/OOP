@@ -34,7 +34,7 @@ public class GameStart extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      
         panel = new JPanel() {
-            
+            @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 if (startGameBackground != null) {
@@ -65,7 +65,7 @@ public class GameStart extends JFrame implements ActionListener{
         aboutUs.addActionListener(this);    
     }
     
-   
+    @Override
     public void actionPerformed(ActionEvent e){
         JButton btn =(JButton) e.getSource();
         

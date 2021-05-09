@@ -1,5 +1,6 @@
 package Api.creature;
 
+// import java.awt.Color;
 import java.awt.Graphics;
 
 import Api.Animation;
@@ -9,7 +10,7 @@ import Application.Game;
 import java.awt.Rectangle;
 
 public class Attack extends Entity {
-    private Game game;
+    // private Game game;
     private Animation attack;
     private float moveX, moveY;
     private int dem;
@@ -19,7 +20,7 @@ public class Attack extends Entity {
     public Attack(Game game, float x, float y, int width, int height, int dem) {
         super(game, x, y, width, height);
 
-        attack = new Animation(Texture.fire_attack, 150);
+        attack = new Animation(Texture.fire_attack, 50);
         this.dem = dem;
         flip = false;
         isBreak = false;
@@ -32,16 +33,16 @@ public class Attack extends Entity {
 
     public int checkDistance(float index_x, float index_y) {
         Rectangle a = new Rectangle((int) index_x, (int) index_y, 32, 32);
-        Rectangle b = new Rectangle((int) x, (int) y, width, height);
+        Rectangle b = new Rectangle( (int) (x - width / 2) + 30, (int) (y - height / 2)+ 45, 110,100);
         if (a.intersects(b))
-            return 1000;
-        else
             return 0;
+        else
+            return 1000;
 
     }
 
     public int checkR() {
-        if (attack.getIndex() > 13 && attack.getIndex() <= 20) {
+        if (attack.getIndex() > 5 && attack.getIndex() <= 20) {
             return 40 + (attack.getIndex() - 5) * 5;
         }
         return 10;
@@ -77,6 +78,7 @@ public class Attack extends Entity {
     public void tick() {
         x += moveX;
         y += moveY;
+        attack.setIndex(dem);
         attack.update();
     }
 
@@ -85,12 +87,15 @@ public class Attack extends Entity {
     }
 
     public void setIndexAttack(int dem) {
-        attack.setIndex(dem);
+       this.dem = dem;
     }
 
     @Override
     public void render(Graphics g) {
         // System.out.println("loi");
+        // Rectangle b = new Rectangle( (int) (x - width / 2), (int) (y - height / 2), 192,192);
+        // g.setColor(Color.BLUE);
+        // g.fillRect( (int) (x - width / 2) + 30, (int) (y - height / 2)+ 50, 110,100);
 
         if (!flip)
             g.drawImage(attack.getCurrentImage(Texture.fire_attack), (int) (x - width / 2), (int) (y - height / 2), 192,

@@ -13,35 +13,41 @@ public class GameState {
    private Game game;
    private Player player;
 
-   // Minh sua 
+   // Minh sua
    private Boss boss;
    private Knights quai;
-   // end 
+   // end
 
    public GameState(Game game) {
-	   this.game=game;
-	   player= new Player(game,96,96,32,32);
+      this.game = game;
+      player = new Player(game, 96, 96, 32, 32);
 
-      // Minh sua 
-      boss = new Boss(game, 300,300,105,90, player);
-   
-      // quai = new Knights(game,10);
-      // 
+      // Minh sua
+      boss = new Boss(game, 400, 400, 105, 90, player);
+
+      quai = new Knights(game, player, 10);
+      //
    }
+
    public void update() {
-	   player.tick();
+      player.tick();
 
-      // Minh sua 
+      // Minh sua
       boss.tick();
-      // quai.tick();
-      // end 
+      quai.tick();
+      // end
    }
-   public void render(Graphics g) {
-	   player.render(g);
 
-      // Minh sua 
-      // quai.render(g);
+   private Knights getKnights() {
+      return quai;
+   }
+
+   public void render(Graphics g) {
+      player.render(g);
+
+      // Minh sua
+      quai.render(g);
       boss.render(g);
-      // end 
+      // end
    }
 }

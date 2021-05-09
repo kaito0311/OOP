@@ -11,6 +11,8 @@ import Api.Bom;
 import Api.NPC;
 import Api.Texture;
 import Application.Game;
+import Application.GameStart;
+
 // import Game.map.map;
 import java.awt.*;
 
@@ -33,9 +35,9 @@ public class Boss extends NPC {
 	 * doi tuong cau lua
 	 */
 	{
-		super(game, x, y, width, height);
+		super(game, player, x, y, width, height);
 		// System.out.println(this.x + " " + y);
-		this.player = player;
+		// this.player = player;
 
 		// map_world = new map();
 
@@ -50,10 +52,10 @@ public class Boss extends NPC {
 
 		picture_die = 0;
 
-		Center_x = 300;
-		Center_y = 300;
+		Center_x = 600;
+		Center_y = 440;
 
-		this.health = 50;
+		this.health = 1000;
 
 	}
 
@@ -62,7 +64,9 @@ public class Boss extends NPC {
 		update_move();
 		boss_state_update();
 		move();
+		player_attack();
 		bom_die.tick();
+		fire.tick();
 		// unrotate(g);
 
 	}
@@ -121,15 +125,27 @@ public class Boss extends NPC {
 
 		}
 	}
+
+	public void setMoveX()
+	{
+		System.out.println("boss");
+		super.setMoveX();
+	}
+	public void setMoveY()
+	{
+		System.out.println("boss");
+		super.setMoveY();
+	}
 	public void moveX()
 	{
-		if( (x+ moveX )<= 0||(int)( x + moveX) >= 790 ) return;
+		if(x + moveX < 0 || x + moveX + width >= GameStart.MAX_WIDTH) moveX = -moveX;
 		x += moveX;
+		
 	}
 
 	public void moveY()
 	{
-		if( y + moveY <= 0 || (y + moveY)>= 630) return;
+		if(y + moveY < 0 || y + moveY + height>= GameStart.MAX_WIDTH) moveY = -moveY;
 		y += moveY;
 	}
 
@@ -152,7 +168,7 @@ public class Boss extends NPC {
 
 		fire.setIndexAttack(picture_attack);
 		picture_attack += 1;
-		fire.tick();
+		    
 		// System.out.println(fire.checkAttack(player.getX(), player.getY()));
 		if(getCheckAttack(player.getX(), player.getY()))
 		{
@@ -161,11 +177,18 @@ public class Boss extends NPC {
 		}
 		
 	}
-
 	public boolean getCheckAttack(float x, float y)
 	{
 		return fire.checkAttack(x, y);
 	}
+	public void player_attack() {
+		Rectangle bounds1 = player.getCollisionBounds(5);
+		Rectangle bounds2 = this.getCollisionBounds(0);
+		if (bounds1.intersects(bounds2) && player.isAttack()) {
+			this.hurt(player.getDamage());
+		}
+	}
+
 	private Graphics2D rotate(Graphics g, int up_down) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.translate((int) (x), (int) (y));
@@ -197,10 +220,7 @@ public class Boss extends NPC {
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.gray);
-		g.fillRect((int) x - 24, (int) y - 30, 50, 4);
-		g.setColor(Color.red);
-		g.fillRect((int) x - 24, (int) y - 30, health - 10, 4);
+		
 
 		// System.out.println(x + " " + Center_x);
 
@@ -214,11 +234,17 @@ public class Boss extends NPC {
 
 			return;
 		}
+		else
+		{
+		g.setColor(Color.gray);
+		g.fillRect((int) x - 45, (int) y - 40, 100, 4);
+		g.setColor(Color.red);
+		g.fillRect((int) x - 45, (int) y - 40, health / 10, 4);
+		}
 
 		if (isAttack) {
 			attack_update();
 			fire.render(g);
-			// System.out.println(fire.checkAttack(player.getX(), player.getY()));
 		}
 		if (moveX == 0 && moveY == 0) {
 			// System.out.println(player.getY() + " " + this.y);/

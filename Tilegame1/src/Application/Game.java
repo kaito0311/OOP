@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import Api.KeyAction;
+import Api.Knights;
 import Api.Sound;
 import Api.Texture;
 import Api.creature.Player;
@@ -25,7 +26,7 @@ public class Game implements Runnable { // bo sung KEyEvent
 	private BufferStrategy bs;
 	private Graphics g;
 	private String audioFilePath;
-	   private Sound audio;
+	private Sound audio;
 
 	public Game(String title, int width, int height) {
 		this.width = width;
@@ -83,29 +84,28 @@ public class Game implements Runnable { // bo sung KEyEvent
 		return key;
 	}
 
-	
+	@Override
 	public void run() {
 		init();
 
-		int fps = 30;
-		double timePerTick = 1000000000.0/fps;
-		
+		int fps = 40;
+		double timePerTick = 1000000000.0 / fps;
+
 		double delta = 0;
-		long now; 
+		long now;
 		long lastTime = System.nanoTime();
-		
-		while(running) {
+
+		while (running) {
 			now = System.nanoTime();
-			delta += (now - lastTime)/timePerTick;
+			delta += (now - lastTime) / timePerTick;
 			lastTime = now;
-			if(delta >=1 )
-			{
+			if (delta >= 1) {
 				// System.out.println("loi");
 				update();
 				render();
-				delta -- ;
+				delta--;
 			}
-//				stop();
+			// stop();
 		}
 		stop();
 	}
@@ -113,7 +113,7 @@ public class Game implements Runnable { // bo sung KEyEvent
 	private void init() {
 
 		worldMap = new WorldMap();
-		temp = worldMap.getMap(0);
+		temp = worldMap.getMap(1);
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(key);
 		// minh sua
@@ -129,4 +129,5 @@ public class Game implements Runnable { // bo sung KEyEvent
 	public void setTemp(Map temp) {
 		this.temp = temp;
 	}
+
 }

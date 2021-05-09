@@ -14,7 +14,7 @@ public class WorldMap {
 	}
 	
 	public void AddMap() {
-		worldMap[0] = new Map("src/assets/map.txt");
+		worldMap[0] = new Map("src/assets/map1.txt");
 		worldMap[1] = new Map("src/assets/map2.txt");
 		worldMap[2] = new Map("src/assets/map3.txt");//sua
 		

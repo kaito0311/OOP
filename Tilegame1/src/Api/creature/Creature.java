@@ -1,14 +1,14 @@
 package Api.creature;
 
 import Api.Entity;
-import Api.Tile;
+// import Api.Tile;
 import Application.Game;
 import java.awt.Rectangle;
-
+import Application.GameStart;
 public abstract class Creature extends Entity {
 
 	protected int health;
-	public static final int maxHealth = 30;
+	public static final int maxHealth = 300;
 	protected float speed;
 	protected float moveX, moveY;
 	// protected Game game;
@@ -19,6 +19,9 @@ public abstract class Creature extends Entity {
 		moveX = 0;
 		moveY = 0;
 		bounds = new Rectangle(0, 0, width, height);
+
+		// health = HEALTH;
+		// speed = SPEED;
 	}
 
 	public void update(float delta) {
@@ -35,12 +38,17 @@ public abstract class Creature extends Entity {
 	}
 
 	public void hurt(int damage) {
-		System.out.println("dau day");
 		health -= damage;
 		if (health <= 0) {
 			dead = true;
 			die();
 		}
+	}
+
+	public void heal(int hp) { // hoi mau
+		health += hp;
+		if (health > maxHealth)
+			health = maxHealth;
 	}
 
 	public int getHealth() {
@@ -75,8 +83,26 @@ public abstract class Creature extends Entity {
 		this.moveY = moveY;
 	}
 
+	public void setBoundsX(float x) {
+		this.bounds.x = (int) x;
+	}
+
+	public void setBoundsY(float y) {
+		this.bounds.y = (int) y;
+	}
+
+	public Rectangle getCollisionBounds(int range) {
+		return new Rectangle((int) (x + bounds.x - range), (int) (y + bounds.y - range), bounds.width + range * 2,
+				bounds.height + range * 2);
+	}
+
 	public void moveX() {
-		if( (x+ moveX )<= 0||(int)( x + moveX) >= 790 ) return;
+		if(x + width+moveX >= GameStart.MAX_WIDTH || x + moveX <= 0)
+			return;
+		if(y + moveY <= 0 || y + height + moveY>= GameStart.MAX_HEIGHT)
+			return;
+
+
 		if (moveX > 0) {
 			int tx = (int) (x + moveX + bounds.x + bounds.width) / 32;
 			int ty = (int) (y + bounds.y) / 32;
@@ -100,7 +126,11 @@ public abstract class Creature extends Entity {
 	}
 
 	public void moveY() {
-		if( y + moveY <= 0 || (y + moveY)>= 630) return;
+		if(x + width+moveX >= GameStart.MAX_WIDTH || x + moveX <= 0)
+			return;
+		if(y + moveY <= 0 || y + height + moveY>= GameStart.MAX_HEIGHT)
+			return;
+
 		if (moveY < 0) {
 			int ty = (int) ((y + moveY + bounds.y) / 32);
 			if (!collisionWithTile((int) (x + bounds.x) / 32, ty)
@@ -127,7 +157,6 @@ public abstract class Creature extends Entity {
 	}
 
 	protected boolean collisionWithTile(int x, int y) {
-		// System.out.println(x + " " + y);
 		if (game.getTemp().getIsRock(x, y) == 1)
 			return true;
 		else
