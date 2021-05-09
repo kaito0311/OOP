@@ -170,7 +170,7 @@ public class Map {
 				} else if (map[i][j] == 40 || map[i][j] == 39) {
 					grass.render(g, j, i);
 					grave.setId(map[i][j] - 39);
-					grave.render(g, i, j);
+					grave.render(g, j, i);
 
 					isRock[map[i][j]] = 1;
 

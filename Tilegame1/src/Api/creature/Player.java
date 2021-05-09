@@ -45,10 +45,10 @@ public class Player extends Creature {
 		attack_left = new Animation(Texture.attack_left, 100);
 		attack_right = new Animation(Texture.attack_right, 100);
 
-		bounds.x = 2;
-		bounds.y = 2;
-		bounds.width = 16;
-		bounds.height = 16;
+		bounds.x = 10;
+		bounds.y = 20;
+		bounds.width = 6;
+		bounds.height = 8;
 
 		// System.out.println("ak");
 	}

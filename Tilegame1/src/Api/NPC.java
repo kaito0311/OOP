@@ -110,8 +110,7 @@ public abstract class NPC extends Creature {
 			} else
 				moveX = -2.0f;
 		}
-		if( x +moveX  <= 0 || x + moveX + bounds.x>= GameStart.MAX_WIDTH)
-			moveX = -moveX;
+
 	}
 
 
@@ -132,8 +131,7 @@ public abstract class NPC extends Creature {
 				moveY = -2.0f;
 		}
 		// moveX = 0;
-		if(moveY + y  <= 0 || y + moveY + bounds.y>= GameStart.MAX_HEIGHT)
-			moveY = -moveY;
+
 
 	}
 

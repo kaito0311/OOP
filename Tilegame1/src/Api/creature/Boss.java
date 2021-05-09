@@ -128,12 +128,12 @@ public class Boss extends NPC {
 
 	public void setMoveX()
 	{
-		System.out.println("boss");
+		// System.out.println("boss");
 		super.setMoveX();
 	}
 	public void setMoveY()
 	{
-		System.out.println("boss");
+		// System.out.println("boss");
 		super.setMoveY();
 	}
 	public void moveX()
