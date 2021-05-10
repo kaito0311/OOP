@@ -50,4 +50,9 @@ public class GameState {
       boss.render(g);
       // end
    }
+   // Tuyen Sua
+   public Player getPlayer() {
+	   return this.player;
+   }
+   // End
 }

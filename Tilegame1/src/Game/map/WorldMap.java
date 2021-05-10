@@ -14,9 +14,14 @@ public class WorldMap {
 	}
 	
 	public void AddMap() {
-		worldMap[0] = new Map("src/assets/map1.txt");
+		// Copy tu a Tuyen
+		worldMap[0] = new Map("src/assets/map3.txt");
+		worldMap[0].renderRect(1, 264, 350, 610);
 		worldMap[1] = new Map("src/assets/map2.txt");
-		worldMap[2] = new Map("src/assets/map3.txt");//sua
+		worldMap[1].renderRect(320, 1, -99, -99);
+		worldMap[2] = new Map("src//assets/map.txt");
+		worldMap[2].renderRect(768, 383, -99, -99);
+		// End
 		
 	}
 }

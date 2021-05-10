@@ -1,5 +1,4 @@
 package nature;
-
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Random;
@@ -9,7 +8,7 @@ import Api.Texture;
 import Api.Tile;
 
 public class Tree extends Tile{
-//	id = 16
+//	id = 18
 	private boolean isBigTree;
 	private static Image[] trees;
 	private int id;
@@ -18,10 +17,6 @@ public class Tree extends Tile{
 		super(trees, 0, 0);
 		init();
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	@Override
 	public void update() {
 		
@@ -34,7 +29,7 @@ public class Tree extends Tile{
 	}
 	@Override
 	public void render(Graphics g, int x, int y) {
-		g.drawImage(trees[id-1], x*32, y*32, null);
+		g.drawImage(trees[y%4], x*32, y*32, null);
 	}
 
 }

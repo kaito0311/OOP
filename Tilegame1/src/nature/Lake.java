@@ -6,7 +6,7 @@ import java.awt.Image;
 import Api.Texture;
 import Api.Tile;
 
-public class Lake extends Tile{
+public class Lake extends Tile {
     private static Image[] image;
     private int id;
 
@@ -15,24 +15,25 @@ public class Lake extends Tile{
         init();
     }
 
-    public void init(){
+    public void init() {
         image = new Image[9];
-        for(int i = 0; i < 9; i++){
-            image[i] = Texture.getTexture("lake_"+(i+1));
+        for (int i = 0; i < 9; i++) {
+            image[i] = Texture.getTexture("lake_" + (i + 1));
         }
     }
-    public void setId(int id){
+
+    public void setId(int id) {
         this.id = id;
     }
 
     @Override
     public void update() {
-        
+
     }
 
     @Override
     public void render(Graphics g, int x, int y) {
-        g.drawImage(image[id], x*32, y*32, null);
+        g.drawImage(image[id], x * 32, y * 32, null);
     }
-    
+
 }

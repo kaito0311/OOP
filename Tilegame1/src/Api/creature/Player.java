@@ -12,7 +12,7 @@ import Application.Game;
 import Application.GameStart;
 // import state.GameState;
 
-// import java.awt.Rectangle;
+import java.awt.Rectangle;
 
 public class Player extends Creature {
 
@@ -20,6 +20,8 @@ public class Player extends Creature {
 	private int previous_state = 0;
 	private int damage;
 	private boolean isAttack = false;
+
+	private Rectangle rect;// Copy tu tuyen(Minh)
 	// Rectangle bounds;
 	// private Game game;
 	private Animation player_up, player_down, player_right, player_left;
@@ -29,6 +31,8 @@ public class Player extends Creature {
 
 	public Player(Game game, float x, float y, int width, int height) {
 		super(game, x, y, width, height);
+
+		rect = new Rectangle((int)x,(int)y,width,height);// Copy tu Tuyen (Minh)
 		if (this.game == null) {
 			System.out.println("ha");
 		}
@@ -194,7 +198,7 @@ public class Player extends Creature {
 		previous_state = 4;
 	}
 	public void hurt(int damage) {
-		System.out.println("dau ");
+		// System.out.println("dau ");
 		health -= damage;
 		if (health <= 0) {
 			dead = true;
@@ -205,6 +209,7 @@ public class Player extends Creature {
 	@Override
 	public void render(Graphics g) {
 		Time_attack();
+		rect = new Rectangle((int)this.getX(),(int)this.getY(),width,height);
 
 		// g.fillRect((int) x, (int) y, 32, 32);
 		if (moveX == 0 && moveY == 0) {
@@ -239,6 +244,9 @@ public class Player extends Creature {
 
 		// ve bound quanh player
 
+	}
+	public Rectangle getRectangle() {
+		return this.rect;
 	}
 
 }

@@ -7,10 +7,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.awt.Rectangle;
 
 import Api.Knights;
 import Api.Texture;
 import nature.BigTree;
+import nature.Chest;
+import nature.ConcreteColumn;
 import nature.FlagBlack;
 import nature.FlagBlue;
 import nature.FlagRed;
@@ -20,6 +23,7 @@ import nature.Grave;
 import nature.Hedge;
 import nature.House;
 import nature.HouseNormal;
+import nature.Lake;
 import nature.Land;
 import nature.Pumpkin;
 import nature.Puppet;
@@ -28,7 +32,10 @@ import nature.Tree;
 import nature.Water;
 
 public class Map {
+	// copy cua Tuyen (Minh)
 	private int map[][];
+	private Lake lake;
+	private Rectangle[] rect;
 	private Land land;
 	private Tree tree;
 	private Grass grass;
@@ -36,16 +43,17 @@ public class Map {
 	private Flower flower;
 	private BigTree bigTree;
 	private Grave grave;
-	// sua
+	private Chest chest;
 	private FlagBlue flagBlue;
 	private FlagBlack flagBlack;
-	private FlagRed flagRed;
-	private House house;
-	private HouseNormal houseNormal;
 	private Pumpkin pumpkin;
 	private Puppet puppet;
 	private Hedge hedge;
 	private RoadSign roadSign;
+	private FlagRed flagRed;
+	private House house;
+	private HouseNormal houseNormal;
+	private ConcreteColumn column;
 
 	private int[] isRock;
 
@@ -57,14 +65,18 @@ public class Map {
 
 	// khoi tao cac doi tuong trong map
 	public void init() {
+		// Copy tu Tuyen(Minh)
+		rect = new Rectangle[2];
+		lake = new Lake();
 		land = new Land();
 		grass = new Grass();
 		tree = new Tree();
 		water = new Water();
+		chest = new Chest();
 		flower = new Flower();
 		bigTree = new BigTree();
+		column = new ConcreteColumn();
 		grave = new Grave();
-		// sua
 		flagBlue = new FlagBlue();
 		flagBlack = new FlagBlack();
 		flagRed = new FlagRed();
@@ -74,6 +86,7 @@ public class Map {
 		puppet = new Puppet();
 		hedge = new Hedge();
 		roadSign = new RoadSign();
+		// End
 		// ket thuc sua
 	}
 
@@ -122,6 +135,16 @@ public class Map {
 
 	}
 
+	// Copy tu a Tuyen
+	public void renderRect(int x1, int y1, int x2, int y2) {
+		rect[0] = new Rectangle(x1, y1, 32, 32);
+		rect[1] = new Rectangle(x2, y2, 32, 32);
+	}
+
+	public Rectangle[] getRectangle() {
+		return this.rect;
+	}
+
 	//
 
 	public int getIsRock(int x, int y) {
@@ -142,41 +165,30 @@ public class Map {
 					land.render(g, j, i);
 				} else if (map[i][j] == 0) {
 					grass.render(g, j, i);
-				} else if (map[i][j] >= 16 && map[i][j] <= 19) {
+				} else if (map[i][j] == 18) {
 					grass.render(g, j, i);
-					tree.setId(map[i][j] - 15);
 					tree.render(g, j, i);
-
 					isRock[map[i][j]] = 1;
-
 				} else if (map[i][j] >= 21 && map[i][j] <= 35) {
 					grass.render(g, j, i);
 					water.setId(map[i][j] - 20);
 					water.render(g, j, i);
 					isRock[map[i][j]] = 1;
-				} else if (map[i][j] == 20) {
+				} else if (map[i][j] == 16) {
 					grass.render(g, j, i);
 					flower.render(g, j, i);
-
 					isRock[map[i][j]] = 1;
-
 				} else if (map[i][j] >= 41 && map[i][j] <= 56) {
 					grass.render(g, j, i);
 					bigTree.setId(map[i][j] - 40);
 					bigTree.render(g, j, i);
-
 					isRock[map[i][j]] = 1;
-
 				} else if (map[i][j] == 40 || map[i][j] == 39) {
 					grass.render(g, j, i);
 					grave.setId(map[i][j] - 39);
 					grave.render(g, j, i);
-
 					isRock[map[i][j]] = 1;
-
-				}
-				// bat dau sua
-				else if (map[i][j] >= 101 && map[i][j] <= 103) {
+				} else if (map[i][j] >= 101 && map[i][j] <= 103) {
 					grass.render(g, j, i);
 					flagBlue.setId(map[i][j] - 100);
 					flagBlue.render(g, j, i);
@@ -192,13 +204,12 @@ public class Map {
 					grass.render(g, j, i);
 					house.setId(map[i][j] - 109);
 					house.render(g, j, i);
-
 					isRock[map[i][j]] = 1;
-
 				} else if (map[i][j] >= 130 && map[i][j] <= 147) {
 					grass.render(g, j, i);
 					houseNormal.setId(map[i][j] - 129);
 					houseNormal.render(g, j, i);
+					isRock[map[i][j]] = 1;
 				} else if (map[i][j] == 90) {
 					grass.render(g, j, i);
 					pumpkin.render(g, j, i);
@@ -215,7 +226,6 @@ public class Map {
 					roadSign.setId(map[i][j] - 86);
 					roadSign.render(g, j, i);
 				}
-				// ket thuc sua
 			}
 		}
 	}

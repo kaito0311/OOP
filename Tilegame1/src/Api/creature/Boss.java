@@ -138,14 +138,18 @@ public class Boss extends NPC {
 	}
 	public void moveX()
 	{
-		if(x + moveX < 0 || x + moveX + width >= GameStart.MAX_WIDTH) moveX = -moveX;
+		if(x + moveX < 0 || x + moveX + width >= GameStart.MAX_WIDTH) 
+			// moveX = -moveX;
+			return;
 		x += moveX;
 		
 	}
 
 	public void moveY()
 	{
-		if(y + moveY < 0 || y + moveY + height>= GameStart.MAX_WIDTH) moveY = -moveY;
+		if(y + moveY < 0 || y + moveY + height>= GameStart.MAX_WIDTH) 
+			// moveY = -moveY;
+			return;
 		y += moveY;
 	}
 
@@ -155,7 +159,7 @@ public class Boss extends NPC {
 			picture_attack = 0;
 			fire.setIsBreak(false);
 			fire.setIndexAttack(picture_attack);
-			System.out.println("Boss attack");
+			// System.out.println("Boss attack");
 		}
 
 		if (picture_attack == 0) {
