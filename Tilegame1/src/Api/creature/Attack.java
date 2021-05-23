@@ -1,6 +1,5 @@
 package Api.creature;
 
-// import java.awt.Color;
 import java.awt.Graphics;
 
 import Api.Animation;
@@ -10,7 +9,6 @@ import Application.Game;
 import java.awt.Rectangle;
 
 public class Attack extends Entity {
-    // private Game game;
     private Animation attack;
     private float moveX, moveY;
     private int dem;
@@ -92,10 +90,6 @@ public class Attack extends Entity {
 
     @Override
     public void render(Graphics g) {
-        // System.out.println("loi");
-        // Rectangle b = new Rectangle( (int) (x - width / 2), (int) (y - height / 2), 192,192);
-        // g.setColor(Color.BLUE);
-        // g.fillRect( (int) (x - width / 2) + 30, (int) (y - height / 2)+ 50, 110,100);
 
         if (!flip)
             g.drawImage(attack.getCurrentImage(Texture.fire_attack), (int) (x - width / 2), (int) (y - height / 2), 192,

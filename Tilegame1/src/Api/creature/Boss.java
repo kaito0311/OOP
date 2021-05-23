@@ -47,6 +47,7 @@ public class Boss extends NPC {
 		boss_right = new Animation(Texture.boss_right, 200);
 
 		fire = new Attack(game, 0, 0, 192, 192, 0);
+		fire.setRect((int)(x - fire.getWidth()/2)+ 30, (int)(y - fire.getHeight()/2)+ 45, 110, 100);
 
 		bom_die = new Bom(game, x, y, 160, 116);
 
@@ -55,16 +56,16 @@ public class Boss extends NPC {
 		Center_x = 600;
 		Center_y = 440;
 
-		this.health = 1000;
+		this.health = 100;
 
 	}
 
 	@Override
 	public void tick() {
+		player_attack();
 		update_move();
 		boss_state_update();
 		move();
-		player_attack();
 		bom_die.tick();
 		fire.tick();
 		// unrotate(g);
@@ -174,23 +175,21 @@ public class Boss extends NPC {
 		picture_attack += 1;
 		    
 		// System.out.println(fire.checkAttack(player.getX(), player.getY()));
+
 		if(getCheckAttack(player.getX(), player.getY()))
 		{
-			player.hurt(1);
-			fire.setIsBreak(true);
+			// player.hurt(1);
+			// fire.setIsBreak(true);
 		}
 		
 	}
+
 	public boolean getCheckAttack(float x, float y)
 	{
-		return fire.checkAttack(x, y);
-	}
-	public void player_attack() {
-		Rectangle bounds1 = player.getCollisionBounds(5);
-		Rectangle bounds2 = this.getCollisionBounds(0);
-		if (bounds1.intersects(bounds2) && player.isAttack()) {
-			this.hurt(player.getDamage());
-		}
+		player.setRect((int)player.getX(), (int)player.getY(), (int)player.getWidth(), player.getHeight());
+		fire.setRect((int)(x - fire.getWidth()/2)+ 30, (int)(y - fire.getHeight()/2)+ 45, 110, 100);
+		return hmmm.attack(player, fire, 1);
+		
 	}
 
 	private Graphics2D rotate(Graphics g, int up_down) {

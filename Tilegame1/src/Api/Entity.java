@@ -3,6 +3,7 @@ package Api;
 import java.awt.Graphics;
 
 import Application.Game;
+import java.awt.Rectangle;
 
 public abstract class Entity {
 
@@ -13,6 +14,7 @@ public abstract class Entity {
 	
 	protected int HP, maxHP;
 	public Game game;
+	protected Rectangle rect;
 
 	
 	public float getX() {
@@ -54,7 +56,16 @@ public abstract class Entity {
 		this.width = width;
 		this.height = height;
 		this.game = game;
+		rect = new Rectangle((int)x,(int) y, width, height);
 		
+	}
+	public void setRect(int x, int y, int width, int height)
+	{
+		rect.setBounds((int)x, (int)y, width, height);
+	}
+	public Rectangle getRect()
+	{
+		return this.rect;
 	}
 	
 	public Entity() {

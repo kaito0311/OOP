@@ -13,6 +13,7 @@ public abstract class Creature extends Entity {
 	protected float moveX, moveY;
 	// protected Game game;
 	protected Rectangle bounds;
+	protected attack_real hmmm = new attack_real(); 
 
 	public Creature(Game game, float x, float y, int width, int height) {
 		super(game, x, y, width, height);
@@ -38,6 +39,7 @@ public abstract class Creature extends Entity {
 	}
 
 	public void hurt(int damage) {
+		System.out.println("dau day");
 		health -= damage;
 		if (health <= 0) {
 			dead = true;
@@ -94,6 +96,11 @@ public abstract class Creature extends Entity {
 	public Rectangle getCollisionBounds(int range) {
 		return new Rectangle((int) (x + bounds.x - range), (int) (y + bounds.y - range), bounds.width + range * 2,
 				bounds.height + range * 2);
+	}
+	public void setRect(int range)
+	{
+		rect.setBounds((int) (x + bounds.x - range), (int) (y + bounds.y - range), bounds.width + range * 2,
+		bounds.height + range * 2);
 	}
 
 	public void moveX() {

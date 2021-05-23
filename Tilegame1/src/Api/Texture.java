@@ -43,6 +43,12 @@ public class Texture {
 	public static BufferedImage[] fire_attack;
 	public static BufferedImage fire_blue;
 
+
+	// 
+
+	public static BufferedImage attack_slash;
+	public static BufferedImage[] slash;
+
 	// end
 	
 	public static void loadImage() {
@@ -60,6 +66,10 @@ public class Texture {
 			fire_blue = ImageIO.read(new File("src/assets/fire_blue.png"));
 			darkKnight = ImageIO.read(new File("src/assets/boss01.png"));
 			smallBoss = ImageIO.read(new File("src/assets/dead_characters.png"));
+
+
+			// attack_slash = ImageIO.read(new File("src/assets/attack_slash2.png"));
+			attack_slash = ImageIO.read(new File("src/assets/Maphap.png"));
 			// End
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -309,6 +319,30 @@ public class Texture {
 		skeleton[0] = smallBoss.getSubimage(0, 32, 16, 16);
 		slime[0] = smallBoss.getSubimage(16, 32, 16, 16);
 		bat[0] = smallBoss.getSubimage(32, 32, 16, 16);
+
+
+		slash = new BufferedImage[20];
+
+		slash[0] = attack_slash.getSubimage(0, 0, 192, 192);
+		slash[1] = attack_slash.getSubimage(192, 0, 192, 192);
+		slash[2] = attack_slash.getSubimage(384, 0, 192, 192);
+		slash[3] = attack_slash.getSubimage(576, 0, 192, 192);
+		slash[4] = attack_slash.getSubimage(768, 0, 192, 192);
+		slash[5] = attack_slash.getSubimage(0, 192, 192, 192);
+		slash[6] = attack_slash.getSubimage(192, 192, 192, 192);
+		slash[7] = attack_slash.getSubimage(384, 192, 192, 192);
+		slash[8] = attack_slash.getSubimage(576, 192, 192, 192);
+		slash[9] = attack_slash.getSubimage(768, 192, 192, 192);
+		slash[10] = attack_slash.getSubimage(0, 384, 192, 192);
+		slash[11] = attack_slash.getSubimage(192, 384, 192, 192);
+		slash[12] = attack_slash.getSubimage(384, 384, 192, 192);
+		slash[13] = attack_slash.getSubimage(576, 384, 192, 192);
+		slash[14] = attack_slash.getSubimage(768, 384, 192, 192);
+		slash[15] = attack_slash.getSubimage(0, 576, 192, 192);
+		slash[16] = attack_slash.getSubimage(192, 576, 192, 192);
+		slash[17] = attack_slash.getSubimage(384, 576, 192, 192);
+		slash[18] = attack_slash.getSubimage(576, 576, 192, 192);
+		slash[19] = attack_slash.getSubimage(768, 576, 192, 192);
 
 		
 		// End

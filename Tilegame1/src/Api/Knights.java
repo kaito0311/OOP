@@ -63,8 +63,10 @@ public class Knights {
     public void tick() {
         for (int i = 0; i < count_NPC; i++) {
             if (npc[i] != null) {
+                npc[i].player_attack();
+                npc[i].attack_player();
+                
                 npc[i].tick();
-                npc[i].player_attack(npc[i]);
                 if (npc[i].isDead()) { // loai bo doi tuong khi chet khoi man hinh
                     npc[i] = null;
                 }

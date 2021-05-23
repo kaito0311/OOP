@@ -81,17 +81,18 @@ public abstract class NPC extends Creature {
 			return true;
 	}
 
-	protected void player_attack(knight e) {
+	protected void player_attack() {
+		if(player.isAttack()== false) return ;
+		this.setRect(0);
+		player.setRect(5);
 
-		Rectangle bounds1 = player.getCollisionBounds(0); // bounds cua player
-		Rectangle bounds2 = e.getCollisionBounds(0); // bounds cua quai
-		Rectangle bounds3 = player.getCollisionBounds(5); // bounds cua player cong them tam danh
-		if (bounds1.intersects(bounds2)) {
-			player.hurt(1);
-		}
-		if (bounds3.intersects(bounds2) && player.isAttack()) {
-			e.hurt(player.getDamage());
-		}
+		hmmm.attack(this, player, 2);
+	}
+	protected void attack_player()
+	{
+		this.setRect(0);
+		player.setRect(0);
+		hmmm.attack(player, this, 2);
 	}
 
 	protected void setMoveX() {

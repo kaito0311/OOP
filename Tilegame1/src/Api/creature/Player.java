@@ -53,6 +53,7 @@ public class Player extends Creature {
 		bounds.y = 20;
 		bounds.width = 6;
 		bounds.height = 8;
+		
 
 		// System.out.println("ak");
 	}
@@ -63,9 +64,10 @@ public class Player extends Creature {
 
 		move_update();
 		attack_update();
-		checkAttack();
+		// checkAttack();
 		update();
 		move();
+		Time_attack();
 
 		// System.out.println("akaaaaaa");
 		// checkAttack();
@@ -84,6 +86,7 @@ public class Player extends Creature {
 		attack_right.update();
 		attack_left.update();
 	}
+	
 
 	private void update() { // update vi tri
 		moveX = 0.f;
@@ -114,16 +117,16 @@ public class Player extends Creature {
 		return this.damage;
 	}
 
-	private boolean checkAttack() {
-		time += System.currentTimeMillis() - lasttime;
+	// private boolean checkAttack() {
+		// time = System.currentTimeMillis() - lasttime;
 
-		if (isAttack && (time >= cooldown)) {
-			time = 0;
-			lasttime = System.currentTimeMillis();
-			return true;
-		}
-		return false;
-	}
+		// if (isAttack && (time >= cooldown)) {
+		// 	time = 0;
+		// 	lasttime = System.currentTimeMillis();
+		// 	return true;
+		// }
+		// return false;
+	// }
 
 	private boolean checkTime() {
 		time = System.currentTimeMillis() - lasttime;
@@ -142,7 +145,7 @@ public class Player extends Creature {
 		if (isAttack == false)
 			return;
 
-		if (dem < Texture.getLengthBufferedImage(Texture.attack_right) * 5)
+		if (dem < Texture.getLengthBufferedImage(Texture.attack_right) *5)
 			return;
 
 		System.out.println("hetime");
@@ -155,6 +158,7 @@ public class Player extends Creature {
 
 	public void die() {
 		System.out.println("YOU LOSE");
+		game.stop();
 	}
 
 	public void drawLeft(Graphics g) {
@@ -173,6 +177,7 @@ public class Player extends Creature {
 		else {
 
 			g.drawImage(attack_right.getCurrentImage(Texture.attack_right), (int) x, (int) y, width, height, null);
+			if(attack_right.getIndex() <20) g.drawImage(Texture.slash[dem], (int)x-20, (int)(y)-20, 384, 384, null);
 			dem++;
 		}
 		previous_state = 2;
@@ -182,7 +187,7 @@ public class Player extends Creature {
 		if (!isAttack)
 			g.drawImage(player_up.getCurrentImage(Texture.player_up), (int) x, (int) y, width, height, null);
 		else {
-			g.drawImage(attack_up.getCurrentImage(Texture.attack_up), (int) x, (int) y, width, height, null);
+			g.drawImage(attack_up.getCurrentImage(Texture.attack_up), (int) x, (int) y, width, height , null);
 			dem++;
 		}
 		previous_state = 3;
@@ -198,7 +203,7 @@ public class Player extends Creature {
 		previous_state = 4;
 	}
 	public void hurt(int damage) {
-		// System.out.println("dau ");
+		System.out.println("dau ");
 		health -= damage;
 		if (health <= 0) {
 			dead = true;
@@ -208,7 +213,7 @@ public class Player extends Creature {
 
 	@Override
 	public void render(Graphics g) {
-		Time_attack();
+		// Time_attack();
 		rect = new Rectangle((int)this.getX(),(int)this.getY(),width,height);
 
 		// g.fillRect((int) x, (int) y, 32, 32);
